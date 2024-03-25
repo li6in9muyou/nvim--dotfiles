@@ -303,7 +303,7 @@ require('lazy').setup({
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = '[h]unk [r]estore' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = '[h]unk [S]tage all!!!' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = '[h]unk [u]ndo' })
+        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = '[h]unk [u]ndo stage' })
         map('n', '<leader>hR', gs.reset_buffer, { desc = '[h]unk [R]estore all!!!' })
         map('n', '<leader>hp', gs.preview_hunk, { desc = '[h]unk [p]review' })
         map('n', '<leader>hb', function()
