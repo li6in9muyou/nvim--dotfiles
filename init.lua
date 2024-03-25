@@ -315,7 +315,7 @@ require('lazy').setup({
         end, { desc = '[h]unk [d]iff against ~' })
 
         map('n', '<leader>td', gs.toggle_deleted, { desc = '[t]oggle [d]elete' })
-        map('n', '<leader>tb', gs.toggle_current_line_blame)
+        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[t]oggle [b]lame' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
