@@ -258,6 +258,11 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame_formatter = '<summary> - <author>, <author_time:%Y-%m-%d>',
+      current_line_blame_opts = {
+        virt_text_pos = 'overlay',
+        delay = 300,
+      },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
