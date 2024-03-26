@@ -354,6 +354,10 @@ require('lazy').setup({
         ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = 'hunk [t]oggle', _ = 'which_key_ignore' },
       }
+
+      require('which-key').register({
+        ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
+      }, { mode = 'v' })
     end,
   },
 
