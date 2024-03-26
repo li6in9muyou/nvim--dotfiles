@@ -352,6 +352,7 @@ require('lazy').setup({
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = 'hunk [t]oggle', _ = 'which_key_ignore' },
       }
     end,
   },
