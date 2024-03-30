@@ -107,6 +107,9 @@ vim.opt.relativenumber = true
 -- Set my shell to pwsh 7
 vim.opt.shell = '"C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe" -nologo'
 
+-- Do not append CRLF or LF when saving files! Let prettier and linters do this
+vim.opt.fixendofline = false
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -127,6 +130,7 @@ vim.opt.undofile = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.wrap = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
@@ -619,7 +623,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
