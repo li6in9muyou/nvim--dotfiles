@@ -818,6 +818,11 @@ require('lazy').setup({
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
+    opts = {
+      on_colors = function(colors)
+        colors.bg = '#000000'
+      end,
+    },
   },
 
   -- Highlight todo, notes, etc in comments
