@@ -674,7 +674,8 @@ require('lazy').setup({
   },
 
   { -- Autoformat
-    'stevearc/conform.nvim',
+    -- 'stevearc/conform.nvim',
+    'li6in9muyou/fix-prettier-crlf-unexpected-empty-line-at-EOF--conform.nvim',
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
