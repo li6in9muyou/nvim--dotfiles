@@ -676,6 +676,18 @@ require('lazy').setup({
     end,
   },
 
+  -- install with yarn or npm
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    -- if error occurs, just run this yourself
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+
   { -- Autoformat
     -- 'stevearc/conform.nvim',
     'li6in9muyou/fix-prettier-crlf-unexpected-empty-line-at-EOF--conform.nvim',
@@ -701,6 +713,7 @@ require('lazy').setup({
         -- is found.
         javascript = { 'prettier' },
         typescript = { 'prettier' },
+        markdown = { 'prettier' },
       },
     },
   },
