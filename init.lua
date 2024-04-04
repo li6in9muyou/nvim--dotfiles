@@ -361,6 +361,7 @@ require('lazy').setup({
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = 'hunk [t]oggle', _ = 'which_key_ignore' },
+        ['<leader>p'] = { name = 'har[p]oon', _ = 'which_key_ignore' },
       }
 
       require('which-key').register({
@@ -913,6 +914,11 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -958,6 +964,44 @@ require('lazy').setup({
 -- Like many other themes, this one has different styles, and you could load
 -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 vim.cmd.colorscheme 'tokyonight-night'
+
+local harpoon = require 'harpoon'
+
+-- REQUIRED
+harpoon:setup {}
+-- REQUIRED
+
+local keymap_helper = function(mode, keys, func, desc)
+  vim.keymap.set(mode, keys, func, { desc = desc })
+end
+
+keymap_helper('n', '<leader>pa', function()
+  harpoon:list():add()
+end, '[a]dd current buffer')
+keymap_helper('n', '<leader>pm', function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, 'list [m]arks')
+
+keymap_helper('n', '<leader>p1', function()
+  harpoon:list():select(1)
+end, 'go to [1]')
+keymap_helper('n', '<leader>p2', function()
+  harpoon:list():select(2)
+end, 'go to [2]')
+keymap_helper('n', '<leader>p3', function()
+  harpoon:list():select(3)
+end, 'go to [3]')
+keymap_helper('n', '<leader>p4', function()
+  harpoon:list():select(4)
+end, 'go to [4]')
+
+-- Toggle previous & next buffers stored within Harpoon list
+keymap_helper('n', '<leader>pp', function()
+  harpoon:list():prev()
+end, 'go to [p]revious')
+keymap_helper('n', '<leader>pn', function()
+  harpoon:list():next()
+end, 'go to [n]ext')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
