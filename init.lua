@@ -108,7 +108,8 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Set my shell to pwsh 7
-vim.opt.shell = '"C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe" -nologo'
+vim.opt.shell = '"C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"'
+vim.opt.shellcmdflag = '-NoLogo'
 
 -- Do not append CRLF or LF when saving files! Let prettier and linters do this
 vim.opt.fixendofline = false
