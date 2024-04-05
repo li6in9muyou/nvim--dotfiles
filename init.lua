@@ -95,6 +95,10 @@ vim.g.have_nerd_font = true
 
 -- Increase netrw history because windows slashes
 vim.g.netrw_dirhistmax = 29
+-- open in prior window, tree view
+vim.g.netrw_browser_split = 4
+vim.g.netrw_liststyle = 3
+
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
