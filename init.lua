@@ -755,6 +755,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'uga-rosa/cmp-dictionary',
     },
     config = function()
       -- See `:help cmp`
@@ -820,9 +821,23 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'dictionary' },
         },
       }
     end,
+  },
+
+  {
+    'uga-rosa/cmp-dictionary',
+    opts = {
+      paths = { (vim.fn.stdpath 'data') .. '/words.txt' },
+      exact_length = 2,
+      first_case_insensitive = true,
+      document = {
+        enable = false,
+        -- command = { 'wn', '${label}', '-over' },
+      },
+    },
   },
 
   { -- You can easily change to a different colorscheme.
