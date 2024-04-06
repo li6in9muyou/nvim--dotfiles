@@ -440,7 +440,7 @@ require('lazy').setup({
           layout_strategy = 'vertical',
           layout_config = {
             vertical = {
-              height = 0.99999,
+              height = { padding = 1 },
               width = 0.8,
               preview_height = 16,
               -- when the number of lines in screen is
