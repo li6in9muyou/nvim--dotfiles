@@ -99,7 +99,6 @@ vim.g.netrw_dirhistmax = 29
 vim.g.netrw_browser_split = 4
 vim.g.netrw_liststyle = 3
 
-
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
