@@ -171,6 +171,7 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+vim.keymap.set('n', 'x', '"9x', {})
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -265,10 +266,10 @@ require('lazy').setup({
     opts = {
       signs = {
         add = { text = '🟩' },
-        change = { text = '🧐' },
+        change = { text = '✒️' },
         delete = { text = '🔶' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        topdelete = { text = '🔺' },
+        changedelete = { text = '🧐' },
       },
       current_line_blame_formatter = '<summary> - <author>, <author_time:%Y-%m-%d>',
       current_line_blame_opts = {
@@ -760,6 +761,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'uga-rosa/cmp-dictionary',
+      'rafamadriz/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
@@ -828,6 +830,7 @@ require('lazy').setup({
           { name = 'dictionary' },
         },
       }
+      require('luasnip.loaders.from_vscode').lazy_load()
     end,
   },
 
