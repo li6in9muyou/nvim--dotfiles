@@ -439,12 +439,14 @@ require('lazy').setup({
           winblend = 13,
           layout_strategy = 'vertical',
           layout_config = {
-            height = 0.99999,
-            width = 0.8,
-            preview_height = 16,
-            -- when the number of lines in screen is less than
-            -- ${preview_cutoff}, preview is disabled
-            preview_cutoff = 20,
+            vertical = {
+              height = 0.99999,
+              width = 0.8,
+              preview_height = 16,
+              -- when the number of lines in screen is
+              -- less than ${preview_cutoff}, preview is disabled
+              preview_cutoff = 20,
+            },
           },
         },
         -- pickers = {}
