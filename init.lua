@@ -693,7 +693,7 @@ require('lazy').setup({
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     -- if error occurs, just run this yourself
-    build = 'cd app && yarn install',
+    build = 'cd app && yarn',
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
     end,
