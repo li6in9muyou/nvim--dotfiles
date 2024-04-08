@@ -105,6 +105,9 @@ vim.g.netrw_bufsettings = 'noma nomod nowrap ro nobl nu rnu'
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- when I tab, insert spaces
+vim.opt.expandtab = true
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
