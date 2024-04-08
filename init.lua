@@ -172,6 +172,8 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 vim.keymap.set('n', 'x', '"9x', {})
 
+vim.keymap.set('n', ':w', ':wa', { desc = 'save all changed buffers every time I save' })
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
