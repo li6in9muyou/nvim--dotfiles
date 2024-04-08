@@ -98,6 +98,7 @@ vim.g.netrw_dirhistmax = 29
 -- open in prior window, tree view
 vim.g.netrw_browser_split = 4
 vim.g.netrw_liststyle = 3
+vim.g.netrw_bufsettings = 'noma nomod nowrap ro nobl nu rnu'
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
