@@ -509,10 +509,10 @@ require('lazy').setup({
             vertical = {
               height = { padding = 1 },
               width = 0.8,
-              preview_height = 27,
+              preview_height = 0.6,
               -- when the number of lines in screen is
               -- less than ${preview_cutoff}, preview is disabled
-              preview_cutoff = 32,
+              preview_cutoff = 24,
             },
           },
         },
