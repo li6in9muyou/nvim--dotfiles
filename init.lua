@@ -426,6 +426,65 @@ require('lazy').setup({
       -- This opens a window that shows you all of the keymaps for the current
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
+      local binary_crap = {
+        'assets[/\\]images',
+        'assets[/\\]image',
+        'asset[/\\]images',
+        'asset[/\\]image',
+        '%.png',
+        '%.jpg',
+        '%.jpeg',
+        '%.gif',
+        '%.bmp',
+        '%.tiff',
+        '%.psd',
+        '%.mp4',
+        '%.mkv',
+        '%.avi',
+        '%.mov',
+        '%.mpg',
+        '%.vob',
+        '%.mp3',
+        '%.aac',
+        '%.wav',
+        '%.flac',
+        '%.ogg',
+        '%.mka',
+        '%.wma',
+        '%.doc',
+        '%.xls',
+        '%.ppt',
+        '%.docx',
+        '%.odt',
+        '%.zip',
+        '%.rar',
+        '%.7z',
+        '%.tar',
+        '%.iso',
+        '%.mdb',
+        '%.frm',
+        '%.sqlite',
+        '%.exe',
+        '%.dll',
+        '%.so',
+        '%.class',
+      }
+
+      local tool_chain_crap = { '%.yarn[/\\]cache', '%.idea' }
+
+      local concat = function(...)
+        local result = {} -- Initialize an empty table to store the concatenated values
+
+        -- Iterate through each argument (table)
+        for _, tbl in ipairs { ... } do
+          -- Append each value from the current table to the result table
+          for _, value in ipairs(tbl) do
+            table.insert(result, value)
+          end
+        end
+
+        return result -- Return the concatenated table
+      end
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
@@ -434,6 +493,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          file_ignore_patterns = concat(binary_crap, tool_chain_crap),
           -- mappings = {
           --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           -- },
