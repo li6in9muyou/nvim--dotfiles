@@ -170,7 +170,7 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-vim.keymap.set('n', 'x', '"9x', {})
+vim.keymap.set('n', 'x', '"9x', { desc = "don't mess up my yank" })
 
 vim.keymap.set('n', ':w', ':wa', { desc = 'save all changed buffers every time I save' })
 
@@ -438,16 +438,16 @@ require('lazy').setup({
           --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           -- },
           path_display = { 'truncate' },
-          winblend = 13,
+          winblend = 0,
           layout_strategy = 'vertical',
           layout_config = {
             vertical = {
               height = { padding = 1 },
               width = 0.8,
-              preview_height = 16,
+              preview_height = 27,
               -- when the number of lines in screen is
               -- less than ${preview_cutoff}, preview is disabled
-              preview_cutoff = 20,
+              preview_cutoff = 32,
             },
           },
         },
