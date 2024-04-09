@@ -176,7 +176,7 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 vim.keymap.set('n', 'x', '"9x', { desc = "don't mess up my yank" })
 
-vim.keymap.set('n', '<leader>y', ':%y<CR>', { desc = '[y]ank all in buffer', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>y', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -1109,5 +1109,10 @@ keymap_helper('n', '<leader>pn', function()
   harpoon:list():next()
 end, 'go to [n]ext')
 
+vim.filetype.add {
+  extension = {
+    ['fx'] = 'glsl',
+  },
+}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
