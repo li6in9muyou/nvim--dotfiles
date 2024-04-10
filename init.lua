@@ -912,6 +912,7 @@ require('lazy').setup({
   {
     'uga-rosa/cmp-dictionary',
     opts = {
+      max_number_items = 8,
       paths = { (vim.fn.stdpath 'data') .. '/words.txt' },
       exact_length = 2,
       first_case_insensitive = true,
