@@ -179,7 +179,6 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 vim.keymap.set('n', 'x', '"9x', { desc = "don't mess up my yank" })
 
-vim.keymap.set('n', '<leader>y', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -1126,5 +1125,6 @@ vim.keymap.set('n', '<leader>e', require('lsp_lines').toggle, { desc = 'Toggle d
 vim.keymap.set('i', 'jk', '<Esc>', { silent = true })
 vim.keymap.set('i', 'kj', '<Esc>', { silent = true })
 vim.keymap.set('n', '<leader>vt', ':%s/\\s\\+$//e', { desc = 'remove [t]railing whitespaces', noremap = true })
+vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
