@@ -378,6 +378,10 @@ require('lazy').setup({
       require('which-key').register({
         ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
       }, { mode = 'v' })
+
+      require('which-key').register({
+        ['<leader>v'] = { name = '[v]tility', _ = 'which_key_ignore' },
+      }, { mode = 'n' })
     end,
   },
 
@@ -1121,6 +1125,6 @@ vim.filetype.add {
 vim.keymap.set('n', '<leader>e', require('lsp_lines').toggle, { desc = 'Toggle diagnostic [e]rror messages' })
 vim.keymap.set('i', 'jk', '<Esc>', { silent = true })
 vim.keymap.set('i', 'kj', '<Esc>', { silent = true })
-
+vim.keymap.set('n', '<leader>vt', ':%s/\\s\\+$//e', { desc = 'remove [t]railing whitespaces', noremap = true })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
