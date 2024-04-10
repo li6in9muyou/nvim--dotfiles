@@ -105,6 +105,9 @@ vim.g.netrw_bufsettings = 'noma nomod nowrap ro nobl nu rnu'
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- when buffer is changed externally, automatically reload it
+vim.opt.autoread = true
+
 -- when I tab, insert spaces
 vim.opt.expandtab = true
 
