@@ -848,6 +848,9 @@ require('lazy').setup({
       luasnip.config.setup {}
 
       cmp.setup {
+        performance = {
+          max_view_entries = 13,
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -915,7 +918,6 @@ require('lazy').setup({
   {
     'uga-rosa/cmp-dictionary',
     opts = {
-      max_number_items = 8,
       paths = { (vim.fn.stdpath 'data') .. '/words.txt' },
       exact_length = 2,
       first_case_insensitive = true,
