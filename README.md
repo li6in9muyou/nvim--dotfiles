@@ -9,3 +9,4 @@
 - [x] limit length of auto completion list from dictionary
 - [x] remove trailing spaces before newline
 - [ ] cmp-dictionary, when `max_number_items` is set, inputting "righ" does not suggest "right". see `C:/Users/Li6q/AppData/Local/nvim-data/lazy/cmp-dictionary/lua/cmp_dictionary/source.lua`. Changing config in `nvim-cmp` can work around this.
+- [ ] telescope grip current dir recursively does not work, fix it!
