@@ -842,8 +842,6 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'uga-rosa/cmp-dictionary',
-      'octaltree/cmp-look',
-      'kbwo/cmp-yank',
       'rafamadriz/friendly-snippets',
     },
     config = function()
@@ -915,16 +913,6 @@ require('lazy').setup({
           { name = 'path' },
           { name = 'dictionary' },
           { name = 'buffer' },
-          { name = 'yank' },
-          {
-            name = 'look',
-            keyword_length = 2,
-            option = {
-              convert_case = true,
-              loud = true,
-              dict = (vim.fn.stdpath 'data') .. '/words.txt',
-            },
-          },
         },
       }
       require('luasnip.loaders.from_vscode').lazy_load()
