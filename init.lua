@@ -921,13 +921,14 @@ require('lazy').setup({
 
   {
     'uga-rosa/cmp-dictionary',
+    priority = 0,
     opts = {
       paths = { (vim.fn.stdpath 'data') .. '/words.txt' },
       exact_length = 2,
       first_case_insensitive = true,
       external = {
         enable = true,
-        command = { 'rg', '--max-count', '^${prefix}', '${path}' },
+        command = { 'rg', '-N', '-o', '\\b${prefix}\\w+', '${path}', '--trim' },
       },
       document = {
         enable = false,
