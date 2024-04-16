@@ -915,7 +915,6 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-          { name = 'dictionary' },
           { name = 'buffer' },
         },
       }
@@ -1160,5 +1159,20 @@ vim.filetype.add {
 vim.keymap.set('i', 'kkk', '<Esc>:w<CR>', { silent = true })
 vim.keymap.set('n', '<leader>vt', ':%s/\\s\\+$//e', { desc = 'remove [t]railing whitespaces', noremap = true })
 vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
+
+local text_cmp_sources = {
+  { name = 'path' },
+  { name = 'dictionary' },
+  { name = 'buffer' },
+}
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
+  pattern = 'markdown,txt,gitcommit',
+  callback = function()
+    require('cmp').setup {
+      sources = text_cmp_sources,
+    }
+  end,
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
