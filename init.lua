@@ -326,15 +326,15 @@ require('lazy').setup({
         end, { desc = '[h]unk [r]estore' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = '[h]unk [S]tage all!!!' })
         map('n', '<leader>hu', gs.undo_stage_hunk, { desc = '[h]unk [u]ndo stage' })
-        map('n', '<leader>hR', gs.reset_buffer, { desc = '[h]unk [R]estore all!!!' })
+        -- map('n', '<leader>hR', gs.reset_buffer, { desc = '[h]unk [R]estore all!!!' })
         map('n', '<leader>hp', gs.preview_hunk, { desc = '[h]unk [p]review' })
         map('n', '<leader>hb', function()
           gs.blame_line { full = true }
         end, { desc = '[h]unk [b]lame' })
-        map('n', '<leader>hd', gs.diffthis, { desc = '[h]unk [d]iff' })
-        map('n', '<leader>hD', function()
-          gs.diffthis '~'
-        end, { desc = '[h]unk [d]iff against ~' })
+        -- map('n', '<leader>hd', gs.diffthis, { desc = '[h]unk [d]iff' })
+        -- map('n', '<leader>hD', function()
+        --   gs.diffthis '~'
+        -- end, { desc = '[h]unk [d]iff against ~' })
 
         map('n', '<leader>td', gs.toggle_deleted, { desc = '[t]oggle [d]elete' })
         map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[t]oggle [b]lame' })
