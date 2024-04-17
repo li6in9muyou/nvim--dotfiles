@@ -229,6 +229,40 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local default_cmp_sources = {
+  { name = 'nvim_lsp' },
+  { name = 'luasnip' },
+  { name = 'path' },
+  { name = 'buffer' },
+}
+local text_cmp_sources = {
+  { name = 'nvim_lsp' },
+  { name = 'luasnip' },
+  { name = 'path' },
+  { name = 'buffer' },
+  { name = 'dictionary' },
+}
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
+  pattern = '*',
+  callback = function()
+    require('cmp').setup {
+      sources = default_cmp_sources,
+    }
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
+  pattern = 'markdown,txt,gitcommit',
+  callback = function()
+    table.insert(default_cmp_sources, { name = 'dictionary' })
+    require('cmp').setup {
+      sources = text_cmp_sources,
+    }
+    table.remove(default_cmp_sources, #default_cmp_sources)
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -1160,19 +1194,5 @@ vim.keymap.set('i', 'kkk', '<Esc>:w<CR>', { silent = true })
 vim.keymap.set('n', '<leader>vt', ':%s/\\s\\+$//e', { desc = 'remove [t]railing whitespaces', noremap = true })
 vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 
-local text_cmp_sources = {
-  { name = 'path' },
-  { name = 'dictionary' },
-  { name = 'buffer' },
-}
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
-  pattern = 'markdown,txt,gitcommit',
-  callback = function()
-    require('cmp').setup {
-      sources = text_cmp_sources,
-    }
-  end,
-})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
