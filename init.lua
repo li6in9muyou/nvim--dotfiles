@@ -177,7 +177,7 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-vim.keymap.set('n', 'x', '"9x', { desc = "don't mess up my yank" })
+vim.keymap.set('n', 'x', '"_x', { desc = "don't mess up my yank" })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
