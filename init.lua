@@ -240,6 +240,7 @@ local text_cmp_sources = {
   { name = 'luasnip' },
   { name = 'path' },
   { name = 'buffer' },
+
   { name = 'dictionary' },
 }
 vim.api.nvim_create_autocmd('FileType', {
@@ -255,11 +256,9 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
   pattern = 'markdown,txt,gitcommit',
   callback = function()
-    table.insert(default_cmp_sources, { name = 'dictionary' })
     require('cmp').setup {
       sources = text_cmp_sources,
     }
-    table.remove(default_cmp_sources, #default_cmp_sources)
   end,
 })
 
@@ -810,6 +809,7 @@ require('lazy').setup({
     build = 'cd app && yarn',
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
+      vim.g.mkdp_port = { '13334' }
     end,
     ft = { 'markdown' },
   },
