@@ -676,7 +676,9 @@ require('lazy').setup({
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('<leader>D', function()
+            require('telescope.builtin').lsp_type_definitions { path_display = { 'tail' } }
+          end, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -809,7 +811,7 @@ require('lazy').setup({
     build = 'cd app && yarn',
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
-      vim.g.mkdp_port = { '13334' }
+      vim.g.mkdp_port = '13334'
     end,
     ft = { 'markdown' },
   },
