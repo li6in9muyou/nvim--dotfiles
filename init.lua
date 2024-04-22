@@ -605,7 +605,7 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      'williamboman/mason.nvim',
+      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -721,6 +721,16 @@ require('lazy').setup({
               callback = vim.lsp.buf.clear_references,
             })
           end
+
+          -- The following autocommand is used to enable inlay hints in your
+          -- code, if the language server you are using supports them
+          --
+          -- This may be unwanted, since they displace some of your code
+          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            map('<leader>th', function()
+              vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+            end, '[T]oggle Inlay [H]ints')
+          end
         end,
       })
 
@@ -819,6 +829,7 @@ require('lazy').setup({
   { -- Autoformat
     -- 'stevearc/conform.nvim',
     'li6in9muyou/fix-prettier-crlf-unexpected-empty-line-at-EOF--conform.nvim',
+    lazy = false,
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -921,6 +932,12 @@ require('lazy').setup({
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
+
+          -- If you prefer more traditional completion keymaps,
+          -- you can uncomment the following lines
+          --['<CR>'] = cmp.mapping.confirm { select = true },
+          --['<Tab>'] = cmp.mapping.select_next_item(),
+          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -1055,6 +1072,8 @@ require('lazy').setup({
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
+      -- Prefer git instead of curl in order to improve connectivity in some environments
+      require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 
@@ -1114,6 +1133,9 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
+  -- require 'kickstart.plugins.autopairs',
+  -- require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
