@@ -145,6 +145,8 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wrap = true
+vim.opt.breakat = ' ^I!@*-+;:,./?(){}[]'
+vim.opt.linebreak = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
@@ -1212,23 +1214,23 @@ local keymap_helper = function(mode, keys, func, desc)
   vim.keymap.set(mode, keys, func, { desc = desc })
 end
 
-keymap_helper('n', '<leader>pa', function()
+keymap_helper('n', '<leader>m', function()
   harpoon:list():add()
-end, '[a]dd current buffer')
-keymap_helper('n', '<leader>pm', function()
+end, 'harpoon: [a]dd current buffer')
+keymap_helper('n', "<leader>'", function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
-end, 'list [m]arks')
+end, 'harpoon: list [m]arks')
 
-keymap_helper('n', '<leader>p1', function()
+keymap_helper('n', '<leader>1', function()
   harpoon:list():select(1)
 end, 'go to [1]')
-keymap_helper('n', '<leader>p2', function()
+keymap_helper('n', '<leader>2', function()
   harpoon:list():select(2)
 end, 'go to [2]')
-keymap_helper('n', '<leader>p3', function()
+keymap_helper('n', '<leader>3', function()
   harpoon:list():select(3)
 end, 'go to [3]')
-keymap_helper('n', '<leader>p4', function()
+keymap_helper('n', '<leader>4', function()
   harpoon:list():select(4)
 end, 'go to [4]')
 
