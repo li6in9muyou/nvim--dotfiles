@@ -1268,7 +1268,7 @@ vim.keymap.set('n', '<leader>vt', ':%s/\\s\\+$//e', { desc = 'remove [t]railing 
 vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 
 -- warns if buffer is modified by others
-local my_config = vim.api.nvim_create_augroup 'my-config'
+local my_config = vim.api.nvim_create_augroup('my-config', {})
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
   group = my_config,
   pattern = '*',
