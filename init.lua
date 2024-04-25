@@ -245,8 +245,10 @@ local text_cmp_sources = {
 
   { name = 'dictionary' },
 }
+
+local my_filetype_config = vim.api.nvim_create_augroup('my-filetype-config', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
+  group = my_filetype_config,
   pattern = '*',
   callback = function()
     require('cmp').setup {
@@ -255,7 +257,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('my-filetype-config', { clear = true }),
+  group = my_filetype_config,
   pattern = 'markdown,txt,gitcommit',
   callback = function()
     require('cmp').setup {
