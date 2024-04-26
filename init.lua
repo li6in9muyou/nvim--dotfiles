@@ -1261,6 +1261,9 @@ vim.filetype.add {
   extension = {
     ['fx'] = 'glsl',
   },
+  filename = {
+    ['.gitconfig'] = 'ini',
+  },
 }
 
 vim.keymap.set('i', 'kkk', '<Esc>:w<CR>', { silent = true })
