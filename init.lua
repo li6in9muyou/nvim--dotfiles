@@ -415,6 +415,9 @@ require('lazy').setup({
       require('which-key').register({
         ['<leader>v'] = { name = '[v]tility', _ = 'which_key_ignore' },
       }, { mode = 'n' })
+      require('which-key').register({
+        ['<leader>vt'] = { name = '[t]ogglt features', _ = 'which_key_ignore' },
+      }, { mode = 'n' })
     end,
   },
 
