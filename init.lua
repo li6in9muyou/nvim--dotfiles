@@ -245,26 +245,19 @@ local text_cmp_sources = {
 
   { name = 'dictionary' },
 }
-
-local my_filetype_config = vim.api.nvim_create_augroup('my-filetype-config', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = my_filetype_config,
-  pattern = '*',
-  callback = function()
-    require('cmp').setup {
-      sources = default_cmp_sources,
-    }
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = my_filetype_config,
-  pattern = 'markdown,txt,gitcommit',
-  callback = function()
+local is_suggesting_words = false
+vim.keymap.set('n', '<leader>vtw', function()
+  is_suggesting_words = not is_suggesting_words
+  if is_suggesting_words then
     require('cmp').setup {
       sources = text_cmp_sources,
     }
-  end,
-})
+  else
+    require('cmp').setup {
+      sources = default_cmp_sources,
+    }
+  end
+end, { desc = '[t]oggle suggest [w]ords', noremap = true })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
