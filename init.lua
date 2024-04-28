@@ -1100,7 +1100,7 @@ require('lazy').setup({
       require('oil').setup {
         skip_confirm_for_simple_edits = true,
         -- always keep an oil in buffer list
-        cleanup_delay_ms = false,
+        cleanup_delay_ms = 2000,
         -- always keep an oil in buffer list
         buf_options = {
           buflisted = true,
@@ -1280,8 +1280,9 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
   command = ':checktime',
 })
 
--- :here to open buffer file parent
+-- :Here to open buffer file parent
 vim.api.nvim_create_user_command('Here', ':e %:h', { desc = 'open buffer file parent' })
+vim.api.nvim_create_user_command('Ex', ':e %:h', { desc = 'open buffer file parent' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
