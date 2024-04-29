@@ -258,6 +258,10 @@ vim.keymap.set('n', '<leader>vtw', function()
     }
   end
 end, { desc = '[t]oggle suggest [w]ords', noremap = true })
+
+-- change \ to /
+vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
+
 local is_disable_format_on_save = false
 local kb_toggle_format_on_save = '<leader>vtf'
 vim.keymap.set('n', kb_toggle_format_on_save, function()
