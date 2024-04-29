@@ -258,6 +258,12 @@ vim.keymap.set('n', '<leader>vtw', function()
     }
   end
 end, { desc = '[t]oggle suggest [w]ords', noremap = true })
+local is_disable_format_on_save = false
+local kb_toggle_format_on_save = '<leader>vtf'
+vim.keymap.set('n', kb_toggle_format_on_save, function()
+  is_disable_format_on_save = not is_disable_format_on_save
+  print('format on save: ' .. (is_disable_format_on_save and 'off' or 'on'))
+end, { desc = '[t]oggle [f]ormat on save', noremap = true })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -833,6 +839,10 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        if is_disable_format_on_save then
+          print(kb_toggle_format_on_save .. ' to toggle format on save')
+          return nil
+        end
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
