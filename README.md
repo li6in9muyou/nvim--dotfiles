@@ -1,7 +1,7 @@
 # nvim config todo
 
 - [x] auto complete workspace file names
-- [ ] Emmet
+- [x] Emmet
 - [ ] Dictionary auto completeion does not work out-of-the-box
 - [x] MarkdownPreview does not work out-of-the-box
 - [x] shell path should not be absolute path, use `pwsh` if possible
