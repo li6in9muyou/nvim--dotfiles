@@ -593,6 +593,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>sc', function()
         builtin.git_bcommits {
+          prompt_title = 'git log <current file>',
           git_command = { 'git', 'log', '--format=%h %as %s', '--abbrev-commit' },
         }
       end, { desc = '[s]earch [c]ommits' })
