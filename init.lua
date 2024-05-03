@@ -567,7 +567,12 @@ require('lazy').setup({
           },
           sorting_strategy = 'ascending',
         },
-        -- pickers = {}
+        pickers = {
+          git_bcommits = {
+            -- default mapping checkouts that commit, i don't like that
+            mappings = { i = { ['<cr>'] = false }, n = { ['<cr>'] = false } },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -584,6 +589,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sc', function()
+        builtin.git_bcommits {
+          git_command = { 'git', 'log', '--format=%h %as %s', '--abbrev-commit' },
+        }
+      end, { desc = '[s]earch [c]ommits' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
