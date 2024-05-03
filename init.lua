@@ -549,9 +549,11 @@ require('lazy').setup({
         --
         defaults = {
           file_ignore_patterns = concat(binary_crap, tool_chain_crap),
-          -- mappings = {
-          --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-          -- },
+          mappings = {
+            i = {
+              ['<esc>'] = require('telescope.actions').close,
+            },
+          },
           path_display = { 'truncate' },
           winblend = 0,
           layout_strategy = 'vertical',
