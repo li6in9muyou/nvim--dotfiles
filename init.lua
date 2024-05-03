@@ -565,6 +565,7 @@ require('lazy').setup({
               preview_cutoff = 24,
             },
           },
+          sorting_strategy = 'ascending',
         },
         -- pickers = {}
         extensions = {
