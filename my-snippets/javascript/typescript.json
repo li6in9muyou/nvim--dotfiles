@@ -1,0 +1,80 @@
+{
+  "Constructor": {
+    "prefix": "ctor",
+    "body": ["/**", " *", " */", "constructor() {", "\tsuper();", "\t$0", "}"],
+    "description": "Constructor"
+  },
+  "Class Definition": {
+    "prefix": "class",
+    "body": [
+      "class ${1:name} {",
+      "\tconstructor(${2:parameters}) {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Class Definition"
+  },
+  "Interface Definition": {
+    "prefix": "iface",
+    "body": ["interface ${1:name} {", "\t$0", "}"],
+    "description": "Interface Definition"
+  },
+  "Public Method Definition": {
+    "prefix": "public method",
+    "body": ["/**", " * ${1:name}", " */", "public ${1:name}() {", "\t$0", "}"],
+    "description": "Public Method Definition"
+  },
+  "Private Method Definition": {
+    "prefix": "private method",
+    "body": ["private ${1:name}() {", "\t$0", "}"],
+    "description": "Private Method Definition"
+  },
+  "Import external module.": {
+    "prefix": "import statement",
+    "body": ["import { $0 } from \"${1:module}\";"],
+    "description": "Import external module."
+  },
+  "Property getter": {
+    "prefix": "get",
+    "body": [
+      "",
+      "public get ${1:value}() : ${2:string} {",
+      "\t${3:return $0}",
+      "}",
+      ""
+    ],
+    "description": "Property getter"
+  },
+  "Define a full property": {
+    "prefix": "prop",
+    "body": [
+      "",
+      "private _${1:value} : ${2:string};",
+      "public get ${1:value}() : ${2:string} {",
+      "\treturn this._${1:value};",
+      "}",
+      "public set ${1:value}(v : ${2:string}) {",
+      "\tthis._${1:value} = v;",
+      "}",
+      ""
+    ],
+    "description": "Define a full property"
+  },
+  "Triple-slash reference": {
+    "prefix": "ref",
+    "body": ["/// <reference path=\"$1\" />", "$0"],
+    "description": "Triple-slash reference"
+  },
+  "Property setter": {
+    "prefix": "set",
+    "body": [
+      "",
+      "public set ${1:value}(v : ${2:string}) {",
+      "\tthis.$3 = v;",
+      "}",
+      ""
+    ],
+    "description": "Property setter"
+  }
+}

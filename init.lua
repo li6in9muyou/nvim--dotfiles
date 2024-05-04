@@ -908,6 +908,8 @@ require('lazy').setup({
     },
   },
 
+  -- must list dependencies before nvim-cmp otherwise cmp_luasnip does not work
+  'saadparwaiz1/cmp_luasnip',
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -945,13 +947,14 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'uga-rosa/cmp-dictionary',
-      'rafamadriz/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      -- or relative to the directory of $MYVIMRC
+      require('luasnip.loaders.from_vscode').lazy_load { paths = './my-snippets' }
 
       cmp.setup {
         performance = {
