@@ -1,8 +1,17 @@
+# DIY bootstraping
+
+## dictionary file
+
+## install ripgrep
+
+## build MarkdownPreview
+
 # nvim config todo
 
+- [ ] complete _DIY bootstraping_ section
 - [x] auto complete workspace file names
 - [x] Emmet
-- [ ] Dictionary auto completeion does not work out-of-the-box
+- [x] Dictionary auto completeion does not work out-of-the-box
 - [x] MarkdownPreview does not work out-of-the-box
 - [x] shell path should not be absolute path, use `pwsh` if possible
 - [x] LSP diagnostics are append to line end and they does not wrap, so sometimes they are not readable at all. This is reverted in last two commits, it's just annoying.
