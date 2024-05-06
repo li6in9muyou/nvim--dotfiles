@@ -8,6 +8,7 @@
 
 # nvim config todo
 
+- [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
 - [ ] clean up '<leader>s' keymaps
 - [ ] do not capitalize letter in which-key popup
 - [ ] complete _DIY bootstraping_ section
