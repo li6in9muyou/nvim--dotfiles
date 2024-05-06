@@ -278,6 +278,7 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mkdp_auto_close = 0
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -873,6 +874,9 @@ require('lazy').setup({
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
       vim.g.mkdp_port = '13334'
+      vim.g.mkdp_page_title = '${name}.md'
+      vim.g.mkdp_images_path = './assets'
+      vim.keymap.set('n', '<leader>vm', '<cmd>MarkdownPreview<cr>', { desc = 'start [m]arkdown preview', noremap = true, silent = true })
     end,
     ft = { 'markdown' },
   },
