@@ -594,7 +594,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sc', function()
         builtin.git_bcommits {
           prompt_title = 'git log <current file>',
-          git_command = { 'git', 'log', '--format=%h %as %s', '--abbrev-commit' },
+          -- FIXME: 
+          -- the --follow switch is "SVN noob" pleaser, better alternatives include -G -S -L
+          -- see https://gitster.livejournal.com/35628.html
+          -- see https://stackoverflow.com/questions/5743739/how-to-really-show-logs-of-renamed-files-with-git
+          git_command = { 'git', 'log', '--format=%h %as %s', '--follow', '--abbrev-commit' },
         }
       end, { desc = '[s]earch [c]ommits' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
