@@ -246,7 +246,7 @@ local text_cmp_sources = {
   { name = 'dictionary' },
 }
 local is_suggesting_words = false
-vim.keymap.set('n', '<leader>vtw', function()
+vim.keymap.set('n', '<leader>tw', function()
   is_suggesting_words = not is_suggesting_words
   if is_suggesting_words then
     require('cmp').setup {
@@ -257,17 +257,18 @@ vim.keymap.set('n', '<leader>vtw', function()
       sources = default_cmp_sources,
     }
   end
-end, { desc = '[t]oggle suggest [w]ords', noremap = true })
+  print('suggest words: ' .. (is_suggesting_words and 'on' or 'off'))
+end, { desc = 'suggest [w]ords', noremap = true })
 
 -- change \ to /
 vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
 
 local is_disable_format_on_save = false
-local kb_toggle_format_on_save = '<leader>vtf'
+local kb_toggle_format_on_save = '<leader>tf'
 vim.keymap.set('n', kb_toggle_format_on_save, function()
   is_disable_format_on_save = not is_disable_format_on_save
   print('format on save: ' .. (is_disable_format_on_save and 'off' or 'on'))
-end, { desc = '[t]oggle [f]ormat on save', noremap = true })
+end, { desc = '[f]ormat on save', noremap = true })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -377,8 +378,8 @@ require('lazy').setup({
         --   gs.diffthis '~'
         -- end, { desc = '[h]unk [d]iff against ~' })
 
-        map('n', '<leader>td', gs.toggle_deleted, { desc = '[t]oggle [d]elete' })
-        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[t]oggle [b]lame' })
+        map('n', '<leader>td', gs.toggle_deleted, { desc = '[d]elete' })
+        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[b]lame' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -415,7 +416,7 @@ require('lazy').setup({
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = 'hunk [t]oggle', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[t]oggle features', _ = 'which_key_ignore' },
         ['<leader>p'] = { name = 'har[p]oon', _ = 'which_key_ignore' },
       }
 
@@ -425,9 +426,6 @@ require('lazy').setup({
 
       require('which-key').register({
         ['<leader>v'] = { name = '[v]tility', _ = 'which_key_ignore' },
-      }, { mode = 'n' })
-      require('which-key').register({
-        ['<leader>vt'] = { name = '[t]ogglt features', _ = 'which_key_ignore' },
       }, { mode = 'n' })
     end,
   },
@@ -758,7 +756,7 @@ require('lazy').setup({
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-            end, '[T]oggle Inlay [H]ints')
+            end, 'Inlay [H]ints')
           end
         end,
       })
