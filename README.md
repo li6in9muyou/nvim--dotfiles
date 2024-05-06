@@ -8,6 +8,8 @@
 
 # nvim config todo
 
+- [ ] clean up '<leader>s' keymaps
+- [ ] do not capitalize letter in which-key popup
 - [ ] complete _DIY bootstraping_ section
 - [x] auto complete workspace file names
 - [x] Emmet
