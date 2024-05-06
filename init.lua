@@ -193,6 +193,15 @@ vim.keymap.set('n', '<leader>e', function()
   vim.diagnostic.open_float()
 end, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+local is_showing_diagnostics = true
+vim.keymap.set('n', '<leader>te', function()
+  is_showing_diagnostics = not is_showing_diagnostics
+  if is_showing_diagnostics then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
+end, { desc = '[e]rror diagnostics' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
