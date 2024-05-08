@@ -4,14 +4,17 @@
     "snippets": [
       {
         "language": [
-          "typescript"
+          "typescript",
+          "typescriptreact"
         ],
         "path": "./javascript/typescript.json"
       },
       {
         "language": [
           "javascript",
-          "typescript"
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
         ],
         "path": "./javascript/javascript.json"
       }
