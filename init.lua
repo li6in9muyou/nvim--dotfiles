@@ -587,6 +587,16 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          advanced_git_search = {
+            entry_default_author_or_date = 'date', -- one of "author" or "date"
+            keymaps = {
+              -- following keymaps can be overridden
+              toggle_date_author = '<C-w>',
+              open_commit_in_browser = '<C-o>',
+              copy_commit_hash = '<C-y>',
+              show_entire_commit = '<C-e>',
+            },
+          },
         },
       }
 
@@ -1200,6 +1210,23 @@ require('lazy').setup({
         },
       }
     end,
+  },
+  {
+    'aaronhallaert/advanced-git-search.nvim',
+    cmd = { 'AdvancedGitSearch' },
+    config = function()
+      require('telescope').load_extension 'advanced_git_search'
+    end,
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      -- to show diff splits and open commits in browser
+      -- "tpope/vim-fugitive",
+      -- to open commits in browser with fugitive
+      -- "tpope/vim-rhubarb",
+      -- optional: to replace the diff from fugitive with diffview.nvim
+      -- (fugitive is still needed to open in browser)
+      -- "sindrets/diffview.nvim",
+    },
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
