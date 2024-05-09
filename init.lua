@@ -828,6 +828,8 @@ require('lazy').setup({
             variables = {},
           },
         },
+        cssls = {},
+        ['css-variables-language-server'] = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
