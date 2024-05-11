@@ -1212,7 +1212,10 @@ require('lazy').setup({
     end,
   },
   {
-    'aaronhallaert/advanced-git-search.nvim',
+    'li6in9muyou/fix-backslash-path-advanced-git-search.nvim',
+    -- it loads plugin from ~/projects
+    -- 'fix-backslash-path-advanced-git-search.nvim',
+    -- dev = true,
     cmd = { 'AdvancedGitSearch' },
     config = function()
       require('telescope').load_extension 'advanced_git_search'
