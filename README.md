@@ -7,6 +7,7 @@
 ## build MarkdownPreview
 
 # nvim config todo
+
 - [ ] show diagnostics in top-right corner https://github.com/dgagn/diagflow.nvim
 - [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
 - [ ] clean up '<leader>s' keymaps
