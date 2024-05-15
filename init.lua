@@ -1217,6 +1217,10 @@ require('lazy').setup({
     -- 'fix-backslash-path-advanced-git-search.nvim',
     -- dev = true,
     cmd = { 'AdvancedGitSearch' },
+    opts = {
+      git_flags = { '--no-pager' },
+      git_diff_flags = { '--no-pager' },
+    },
     config = function()
       require('telescope').load_extension 'advanced_git_search'
     end,
@@ -1388,5 +1392,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
 vim.api.nvim_create_user_command('Here', ':e %:h', { desc = 'open buffer file parent' })
 vim.api.nvim_create_user_command('Ex', ':e %:h', { desc = 'open buffer file parent' })
 
+-- git log search
+vim.keymap.set('v', '<leader>l', ':AdvancedGitSearch diff_commit_line<cr>', { desc = 'git [l]og' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
