@@ -838,6 +838,9 @@ require('lazy').setup({
             variables = {},
           },
         },
+        eslint = {
+          rules = { ['sort-imports'] = 'warn' },
+        },
         cssls = {},
         ['css-variables-language-server'] = {},
         lua_ls = {
