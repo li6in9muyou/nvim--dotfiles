@@ -203,6 +203,8 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mkdp_auto_close = 0
+
+local prettier_formatters = { 'prettierd', 'prettier' }
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -838,20 +840,20 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        html = { 'prettier' },
-        css = { 'prettier' },
-        less = { 'prettier' },
+        html = prettier_formatters,
+        css = prettier_formatters,
+        less = prettier_formatters,
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        python = prettier_formatters,
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescriptreact = { 'prettier' },
-        markdown = { 'prettier' },
-        json = { 'prettier' },
+        javascript = prettier_formatters,
+        typescript = prettier_formatters,
+        javascriptreact = prettier_formatters,
+        typescriptreact = prettier_formatters,
+        markdown = prettier_formatters,
+        json = prettier_formatters,
       },
     },
   },
@@ -1311,5 +1313,12 @@ vim.api.nvim_create_user_command('Ex', ':e %:h', { desc = 'open buffer file pare
 
 -- git log search
 vim.keymap.set('v', '<leader>l', ':AdvancedGitSearch diff_commit_line<cr>', { desc = 'git [l]og' })
+
+-- resize window
+vim.keymap.set({ 'i', 'n' }, '<C-Down>', '<C-W>-', { desc = 'decrease height', noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-Up>', '<C-W>+', { desc = 'increase height', noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-Right>', '<C-W><', { desc = 'decrease width', noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-Left>', '<C-W>>', { desc = 'increase width', noremap = true, silent = true })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
