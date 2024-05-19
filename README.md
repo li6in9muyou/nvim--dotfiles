@@ -8,6 +8,8 @@
 
 # nvim config todo
 
+- [ ] telescope preview from `:AdvancdGitSearch` can not scroll
+- [ ] disable `<c-l|h|j|k>` key binds from oil
 - [ ] figure out what is going on here, I was editing a file in `%TEMP%`
 
   > Error detected while processing BufWritePre Autocommands for "\*":
