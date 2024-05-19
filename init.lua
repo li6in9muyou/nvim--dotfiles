@@ -855,7 +855,7 @@ require('lazy').setup({
         css = prettier_formatters,
         less = prettier_formatters,
         -- Conform can also run multiple formatters sequentially
-        python = prettier_formatters,
+        python = { 'isort', 'black' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
