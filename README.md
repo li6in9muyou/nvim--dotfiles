@@ -8,7 +8,7 @@
 
 # nvim config todo
 
-- [ ] telescope preview from `:AdvancdGitSearch` can not scroll
+- [ ] telescope preview from `:AdvancdGitSearch` can not scroll, something is wrong with advanced-git-search, `:Telescope git_bcommits` can scroll.
 - [ ] disable `<c-l|h|j|k>` key binds from oil
 - [ ] figure out what is going on here, I was editing a file in `%TEMP%`
 

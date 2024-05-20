@@ -504,6 +504,9 @@ require('lazy').setup({
             require('telescope.themes').get_dropdown(),
           },
           advanced_git_search = {
+            git_flags = { '--no-pager' },
+            git_diff_flags = {},
+            diff_plugin = 'diffview',
             entry_default_author_or_date = 'date', -- one of "author" or "date"
             keymaps = {
               -- following keymaps can be overridden
@@ -1147,14 +1150,11 @@ require('lazy').setup({
     -- 'fix-backslash-path-advanced-git-search.nvim',
     -- dev = true,
     cmd = { 'AdvancedGitSearch' },
-    opts = {
-      git_flags = { '--no-pager' },
-      git_diff_flags = { '--no-pager' },
-    },
     config = function()
       require('telescope').load_extension 'advanced_git_search'
     end,
     dependencies = {
+      'sindrets/diffview.nvim',
       'nvim-telescope/telescope.nvim',
       -- to show diff splits and open commits in browser
       -- "tpope/vim-fugitive",
