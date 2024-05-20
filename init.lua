@@ -1142,7 +1142,7 @@ require('lazy').setup({
     end,
   },
   {
-    'li6in9muyou/fix-backslash-path-advanced-git-search.nvim',
+    'aaronhallaert/advanced-git-search.nvim',
     -- it loads plugin from ~/projects
     -- 'fix-backslash-path-advanced-git-search.nvim',
     -- dev = true,
