@@ -8,6 +8,8 @@
 
 # nvim config todo
 
+- [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
+- [ ] how about 'mini.git'
 - [ ] telescope preview from `:AdvancdGitSearch` can not scroll, something is wrong with advanced-git-search, `:Telescope git_bcommits` can scroll.
 - [ ] disable `<c-l|h|j|k>` key binds from oil
 - [ ] figure out what is going on here, I was editing a file in `%TEMP%`
@@ -25,7 +27,6 @@
   > ...a/Local/nvim-data/lazy/conform.nvim/lua/conform/init.lua:104: in function <...a/Local/nvim-data/lazy/conform.nvim/lua/conform/init.lua:95>
 
 - [ ] show diagnostics in top-right corner https://github.com/dgagn/diagflow.nvim
-- [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
 - [ ] clean up '<leader>s' keymaps
 - [ ] do not capitalize letter in which-key popup
 - [ ] complete _DIY bootstraping_ section
