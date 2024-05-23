@@ -9,7 +9,7 @@
 # nvim config todo
 
 - [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
-- [ ] how about 'mini.git'
+- [x] how about 'mini.git'? Not good, it refuses to show `git log -L` when working tree is dirty.
 - [ ] telescope preview from `:AdvancdGitSearch` can not scroll, something is wrong with advanced-git-search, `:Telescope git_bcommits` can scroll.
 - [ ] disable `<c-l|h|j|k>` key binds from oil
 - [ ] figure out what is going on here, I was editing a file in `%TEMP%`
@@ -28,7 +28,7 @@
 
 - [x] show diagnostics in top-right corner https://github.com/dgagn/diagflow.nvim
 - [x] clean up '<leader>s' keymaps
-- [ ] do not capitalize letter in which-key popup
+- [x] do not capitalize letter in which-key popup
 - [ ] complete _DIY bootstraping_ section
 - [x] auto complete workspace file names
 - [x] Emmet
