@@ -26,7 +26,7 @@
   > ...a/Local/nvim-data/lazy/conform.nvim/lua/conform/init.lua:451: in function 'format'
   > ...a/Local/nvim-data/lazy/conform.nvim/lua/conform/init.lua:104: in function <...a/Local/nvim-data/lazy/conform.nvim/lua/conform/init.lua:95>
 
-- [x] show diagnostics in top-right corner https://github.com/dgagn/diagflow.nvim
+- [x] show diagnostics in top-right corner https://github.com/dgagn/diagflow.nvim. The float window sometimes covers my code which is really annoying.
 - [x] clean up '<leader>s' keymaps
 - [x] do not capitalize letter in which-key popup
 - [ ] complete _DIY bootstraping_ section

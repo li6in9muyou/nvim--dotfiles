@@ -1232,13 +1232,6 @@ require('lazy').setup({
       },
     },
   },
-
-  {
-    'dgagn/diagflow.nvim',
-    opts = {
-      scope = 'line',
-    },
-  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
