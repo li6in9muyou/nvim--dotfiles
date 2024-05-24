@@ -11,7 +11,7 @@
 - [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
 - [x] how about 'mini.git'? Not good, it refuses to show `git log -L` when working tree is dirty.
 - [ ] telescope preview from `:AdvancdGitSearch` can not scroll, something is wrong with advanced-git-search, `:Telescope git_bcommits` can scroll.
-- [ ] disable `<c-l|h|j|k>` key binds from oil
+- [x] disable `<c-l|h|j|k>` key binds from oil
 - [ ] figure out what is going on here, I was editing a file in `%TEMP%`
 
   > Error detected while processing BufWritePre Autocommands for "\*":
