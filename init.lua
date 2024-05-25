@@ -1321,6 +1321,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
 -- :Here to open buffer file parent
 vim.api.nvim_create_user_command('Here', ':e %:h', { desc = 'open buffer file parent' })
 vim.api.nvim_create_user_command('Ex', ':e %:h', { desc = 'open buffer file parent' })
+vim.keymap.set('n', '-', '<cmd>Ex<cr>', { desc = 'open buffer file parent' })
 
 -- git log search
 vim.keymap.set('v', '<leader>l', ':AdvancedGitSearch diff_commit_line<cr>', { desc = 'git [l]og' })
