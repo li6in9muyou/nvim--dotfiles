@@ -180,7 +180,7 @@ vim.keymap.set('n', '<leader>tw', function()
       sources = default_cmp_sources,
     }
   end
-  print('suggest words: ' .. (is_suggesting_words and 'on' or 'off'))
+  vim.notify('suggest words: ' .. (is_suggesting_words and 'on' or 'off'))
 end, { desc = 'suggest [w]ords', noremap = true })
 
 -- change \ to /
@@ -190,7 +190,7 @@ local is_disable_format_on_save = false
 local kb_toggle_format_on_save = '<leader>tf'
 vim.keymap.set('n', kb_toggle_format_on_save, function()
   is_disable_format_on_save = not is_disable_format_on_save
-  print('format on save: ' .. (is_disable_format_on_save and 'off' or 'on'))
+  vim.notify('format on save: ' .. (is_disable_format_on_save and 'off' or 'on'))
 end, { desc = '[f]ormat on save', noremap = true })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
