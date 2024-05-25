@@ -1144,6 +1144,9 @@ require('lazy').setup({
       }
     end,
   },
+
+  { 'sindrets/diffview.nvim' },
+
   {
     'aaronhallaert/advanced-git-search.nvim',
     -- it loads plugin from ~/projects
@@ -1332,5 +1335,6 @@ vim.keymap.set({ 'i', 'n' }, '<C-Up>', '<C-W>+', { desc = 'increase height', nor
 vim.keymap.set({ 'i', 'n' }, '<C-Right>', '<C-W><', { desc = 'decrease width', noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-Left>', '<C-W>>', { desc = 'increase width', noremap = true, silent = true })
 
+vim.opt.fillchars:append { diff = '╱' }
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
