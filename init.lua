@@ -527,7 +527,11 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[s]earch [f]iles' })
+      vim.keymap.set('n', '<leader>sf', function()
+        builtin.find_files {
+          find_command = { 'rg', '--files', '--color', 'never', '--hidden', '-g', '!.git' },
+        }
+      end, { desc = '[s]earch [f]iles' })
       vim.keymap.set('n', '<leader>sc', function()
         builtin.git_bcommits {
           prompt_title = 'git log <current file>',
@@ -1140,6 +1144,14 @@ require('lazy').setup({
           ['gx'] = 'actions.open_external',
           ['g.'] = 'actions.toggle_hidden',
           ['g\\'] = 'actions.toggle_trash',
+        },
+        view_options = {
+          -- This function defines what is considered a "hidden" file
+          is_hidden_file = function(name, _)
+            local is_important = false
+            is_important = is_important or vim.startswith(name, '.github')
+            return (not is_important) and vim.startswith(name, '.')
+          end,
         },
       }
     end,
