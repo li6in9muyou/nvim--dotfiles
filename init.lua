@@ -1353,5 +1353,7 @@ vim.keymap.set({ 'i', 'n' }, '<C-Right>', '<C-W><', { desc = 'decrease width', n
 vim.keymap.set({ 'i', 'n' }, '<C-Left>', '<C-W>>', { desc = 'increase width', noremap = true, silent = true })
 
 vim.opt.fillchars:append { diff = '╱' }
+
+vim.keymap.set('n', ';;', '<cmd>w<cr>', { desc = 'alias of :w' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
