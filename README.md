@@ -8,10 +8,10 @@
 
 # nvim config todo
 
-- [ ] migrate this todo list to GitHub Issues
-- [ ] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope
+- [x] migrate this todo list to GitHub Issues
+- [x] seach `git log -s -L${v_start},${v_end}:${current_buffer}` with Telescope. Use `diffview.nvim` instead
 - [x] how about 'mini.git'? Not good, it refuses to show `git log -L` when working tree is dirty.
-- [ ] telescope preview from `:AdvancdGitSearch` can not scroll, something is wrong with advanced-git-search, `:Telescope git_bcommits` can scroll.
+- [x] telescope preview from `:AdvancdGitSearch` can not scroll, something is wrong with advanced-git-search, `:Telescope git_bcommits` can scroll. Use `diffview.nvim` instead
 - [x] disable `<c-l|h|j|k>` key binds from oil
 - [x] show diagnostics in top-right corner https://github.com/dgagn/diagflow.nvim. The float window sometimes covers my code which is really annoying.
 - [x] clean up '<leader>s' keymaps
