@@ -503,19 +503,6 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
-          advanced_git_search = {
-            git_flags = { '--no-pager' },
-            git_diff_flags = {},
-            diff_plugin = 'diffview',
-            entry_default_author_or_date = 'date', -- one of "author" or "date"
-            keymaps = {
-              -- following keymaps can be overridden
-              toggle_date_author = '<C-w>',
-              open_commit_in_browser = '<C-o>',
-              copy_commit_hash = '<C-y>',
-              show_entire_commit = '<C-e>',
-            },
-          },
         },
       }
 
@@ -1164,27 +1151,6 @@ require('lazy').setup({
 
   { 'sindrets/diffview.nvim' },
 
-  {
-    'aaronhallaert/advanced-git-search.nvim',
-    -- it loads plugin from ~/projects
-    -- 'fix-backslash-path-advanced-git-search.nvim',
-    -- dev = true,
-    cmd = { 'AdvancedGitSearch' },
-    config = function()
-      require('telescope').load_extension 'advanced_git_search'
-    end,
-    dependencies = {
-      'sindrets/diffview.nvim',
-      'nvim-telescope/telescope.nvim',
-      -- to show diff splits and open commits in browser
-      -- "tpope/vim-fugitive",
-      -- to open commits in browser with fugitive
-      -- "tpope/vim-rhubarb",
-      -- optional: to replace the diff from fugitive with diffview.nvim
-      -- (fugitive is still needed to open in browser)
-      -- "sindrets/diffview.nvim",
-    },
-  },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -1344,7 +1310,7 @@ vim.api.nvim_create_user_command('Ex', ':e %:h', { desc = 'open buffer file pare
 vim.keymap.set('n', '-', '<cmd>Ex<cr>', { desc = 'open buffer file parent' })
 
 -- git log search
-vim.keymap.set('v', '<leader>l', ':AdvancedGitSearch diff_commit_line<cr>', { desc = 'git [l]og' })
+vim.keymap.set('v', '<leader>l', '<cmd>DiffviewFileHistory<cr>', { desc = 'git [l]og' })
 
 -- resize window
 vim.keymap.set({ 'i', 'n' }, '<C-Down>', '<C-W>-', { desc = 'decrease height', noremap = true, silent = true })
