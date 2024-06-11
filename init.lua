@@ -204,7 +204,7 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mkdp_auto_close = 0
 
-local prettier_formatters = { 'prettierd', 'prettier' }
+local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
