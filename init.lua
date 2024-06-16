@@ -1310,7 +1310,15 @@ vim.api.nvim_create_user_command('Ex', ':e %:h', { desc = 'open buffer file pare
 vim.keymap.set('n', '-', '<cmd>Ex<cr>', { desc = 'open buffer file parent' })
 
 -- git log search
-vim.keymap.set('v', '<leader>l', "<cmd>'<,'>DiffviewFileHistory<cr>", { desc = 'git [l]og' })
+vim.keymap.set('v', '<leader>l', function()
+  local start_pos = vim.fn.getpos 'v'
+  local end_pos = vim.fn.getcurpos()
+  local start_line = start_pos[2]
+  local end_line = end_pos[2]
+  local cmd = '<cmd>' .. start_line .. ',' .. end_line .. 'DiffviewFileHistory<cr>'
+  vim.notify(cmd)
+  return cmd
+end, { desc = 'git [l]og', expr = true })
 
 -- resize window
 vim.keymap.set({ 'i', 'n' }, '<C-Down>', '<C-W>-', { desc = 'decrease height', noremap = true, silent = true })
