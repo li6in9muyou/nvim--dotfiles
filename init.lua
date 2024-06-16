@@ -7,13 +7,6 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
--- Increase netrw history because windows slashes
-vim.g.netrw_dirhistmax = 29
--- open in prior window, tree view
-vim.g.netrw_browser_split = 4
-vim.g.netrw_liststyle = 3
-vim.g.netrw_bufsettings = 'noma nomod nowrap ro nobl nu rnu'
-
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
