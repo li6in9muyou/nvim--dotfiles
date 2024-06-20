@@ -1020,7 +1020,12 @@ require('lazy').setup({
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts = {
+      signs = false,
+      keywords = {
+        ['dnc'] = { color = '#FFFF00', alt = { 'do not commit', 'DO NOT COMMIT' } },
+      },
+    },
   },
 
   { -- Collection of various small independent plugins/modules
