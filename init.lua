@@ -1328,8 +1328,14 @@ vim.keymap.set('n', '-', '<cmd>Ex<cr>', { desc = 'open buffer file parent' })
 vim.keymap.set('v', '<leader>l', function()
   local start_pos = vim.fn.getpos 'v'
   local end_pos = vim.fn.getcurpos()
-  local start_line = start_pos[2]
-  local end_line = end_pos[2]
+
+  local endpoints = { start_pos[2], end_pos[2] }
+  table.sort(endpoints, function(lhs, rhs)
+    return lhs < rhs
+  end)
+
+  local start_line = endpoints[1]
+  local end_line = endpoints[2]
   local cmd = '<cmd>' .. start_line .. ',' .. end_line .. 'DiffviewFileHistory<cr>'
   vim.notify(cmd)
   return cmd
