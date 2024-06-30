@@ -524,7 +524,8 @@ require('lazy').setup({
         }
       end, { desc = '[s]earch [c]ommits' })
       -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
+      vim.keymap.set('n', '<leader>st', builtin.grep_string, { desc = '[s]earch [t]his word' })
+      vim.keymap.set('n', '<leader>sw', '<cmd>Easypick changed_files<cr>', { desc = "[s]earch files I'm [w]orking on (git changed)" })
       -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[s]earch recent files ("." for repeat)' })
@@ -1216,6 +1217,21 @@ require('lazy').setup({
         undo = {},
       },
     },
+  },
+  {
+    'axkirillov/easypick.nvim',
+    config = function()
+      local easypick = require 'easypick'
+      easypick.setup {
+        pickers = {
+          {
+            name = 'changed_files',
+            command = 'git diff --name-only',
+            previewer = easypick.previewers.file_diff(),
+          },
+        },
+      }
+    end,
   },
 }, {
   ui = {
