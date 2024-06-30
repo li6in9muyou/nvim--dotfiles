@@ -1337,7 +1337,6 @@ vim.keymap.set('v', '<leader>l', function()
   local start_line = endpoints[1]
   local end_line = endpoints[2]
   local cmd = '<cmd>' .. start_line .. ',' .. end_line .. 'DiffviewFileHistory<cr>'
-  vim.notify(cmd)
   return cmd
 end, { desc = 'git [l]og', expr = true })
 
