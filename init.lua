@@ -1309,6 +1309,12 @@ vim.filetype.add {
 
 vim.keymap.set('i', 'kkk', '<Esc>:w<CR>', { silent = true })
 vim.keymap.set('n', '<leader>vr', ':%s/\\s\\+$//e', { desc = 't[r]im trailing whitespaces', noremap = true })
+vim.keymap.set(
+  'n',
+  '<leader>vu',
+  '%s/\\u\\(\\x\\{4}\\)/\\=nr2char(str2nr(submatch(1),16))/g',
+  { desc = 'convert \\uABCD escape sequences to actual codepoint', noremap = true, silent = true }
+)
 vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 
 -- warns if buffer is modified by others
