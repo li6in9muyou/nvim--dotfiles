@@ -104,9 +104,9 @@ local is_showing_diagnostics = true
 vim.keymap.set('n', '<leader>te', function()
   is_showing_diagnostics = not is_showing_diagnostics
   if is_showing_diagnostics then
-    vim.diagnostic.show()
+    vim.diagnostic.enable()
   else
-    vim.diagnostic.hide()
+    vim.diagnostic.disable()
   end
 end, { desc = '[e]rror diagnostics' })
 
