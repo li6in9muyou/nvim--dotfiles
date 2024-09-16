@@ -753,9 +753,7 @@ require('lazy').setup({
             variables = {},
           },
         },
-        eslint = {
-          rules = { ['sort-imports'] = 'warn' },
-        },
+        eslint = {},
         cssls = {},
         ['css-variables-language-server'] = {},
         lua_ls = {
