@@ -198,6 +198,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mkdp_auto_close = 0
 
 local important_files_in_oil = { '.github', '.gitignore' }
+local excluded_folders_in_leader_sf = { 'node_modules', '.git' }
 
 local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
@@ -514,8 +515,18 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
       vim.keymap.set('n', '<leader>sf', function()
+        local function rg_file_path_exclusion_filters(exclude_dirs)
+          local ans = {}
+          for _, dir in ipairs(exclude_dirs) do
+            table.insert(ans, '-g')
+            table.insert(ans, '!' .. dir)
+          end
+          return ans
+        end
+
+        local spread = table.unpack or unpack
         builtin.find_files {
-          find_command = { 'rg', '--files', '--color', 'never', '--hidden', '-g', '!.git' },
+          find_command = { 'rg', '--files', '--color', 'never', '--hidden', spread(rg_file_path_exclusion_filters(excluded_folders_in_leader_sf)) },
         }
       end, { desc = '[s]earch [f]iles' })
       vim.keymap.set('n', '<leader>sc', function()
