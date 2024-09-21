@@ -332,27 +332,23 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup { window = { border = 'single' } }
+      require('which-key').setup { win = { border = 'single' } }
 
       -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[c]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[d]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[r]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[s]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[w]orkspace', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[t]oggle features', _ = 'which_key_ignore' },
-        ['<leader>p'] = { name = 'har[p]oon', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>c', group = '[c]ode' },
+        { '<leader>d', group = '[d]ocument' },
+        { '<leader>r', group = '[r]ename' },
+        { '<leader>s', group = '[s]earch' },
+        { '<leader>w', group = '[w]orkspace' },
+        { '<leader>t', group = '[t]oggle features' },
+        { '<leader>p', group = 'har[p]oon' },
       }
 
-      require('which-key').register({
-        ['<leader>h'] = { name = '[h]unk', _ = 'which_key_ignore' },
-      }, { mode = 'v' })
-
-      require('which-key').register({
-        ['<leader>v'] = { name = '[v]tility', _ = 'which_key_ignore' },
-      }, { mode = 'n' })
+      require('which-key').add {
+        { '<leader>h', group = 'git [h]unk', mode = { 'v', 'n' } },
+        { '<leader>v', group = '[v]tility', mode = 'n' },
+      }
     end,
   },
 
