@@ -1209,10 +1209,15 @@ require('lazy').setup({
   },
   {
     'jinh0/eyeliner.nvim',
-    opts = {
-      highlight_on_key = true,
-      dim = true,
-    },
+    config = function()
+      require('eyeliner').setup {
+        highlight_on_key = false,
+        dim = false,
+        match = '[a-zA-z0-9]',
+      }
+      vim.api.nvim_set_hl(0, 'EyelinerPrimary', { fg = '#ffff00', underline = true, bold = true })
+      vim.api.nvim_set_hl(0, 'EyelinerSecondary', { fg = '#bbbb44', underline = true, bold = true })
+    end,
   },
 
   {
