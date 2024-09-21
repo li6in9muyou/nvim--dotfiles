@@ -197,6 +197,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mkdp_auto_close = 0
 
+local important_files_in_oil = { '.github', '.gitignore' }
+
 local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
 --
@@ -1150,7 +1152,12 @@ require('lazy').setup({
           -- This function defines what is considered a "hidden" file
           is_hidden_file = function(name, _)
             local is_important = false
-            is_important = is_important or vim.startswith(name, '.github')
+            for _, prefix in ipairs(important_files_in_oil) do
+              if vim.startswith(name, prefix) then
+                is_important = true
+                break
+              end
+            end
             return (not is_important) and vim.startswith(name, '.')
           end,
         },
