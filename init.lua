@@ -236,10 +236,18 @@ require('lazy').setup({
       signs = {
         add = { text = '🟩' },
         change = { text = '✒️' },
-        delete = { text = '🔶' },
-        topdelete = { text = '🔺' },
-        changedelete = { text = '🧐' },
+        delete = { text = '🟥' },
+        topdelete = { text = '🟥' },
+        changedelete = { text = '📝' },
       },
+      signs_staged = {
+        add = { text = '📦' },
+        change = { text = '📦' },
+        delete = { text = '📦' },
+        topdelete = { text = '📦' },
+        changedelete = { text = '📦' },
+      },
+      signs_staged_enable = true,
       current_line_blame_formatter = '<summary> - <author>, <author_time:%Y-%m-%d>',
       current_line_blame_opts = {
         virt_text_pos = 'overlay',
