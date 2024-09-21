@@ -199,6 +199,13 @@ vim.g.mkdp_auto_close = 0
 
 local important_files_in_oil = { '.github', '.gitignore' }
 local excluded_folders_in_leader_sf = { 'node_modules', '.git' }
+local function prefix_with_bang(strings)
+  local result = {}
+  for _, v in ipairs(strings) do
+    table.insert(result, '!' .. v)
+  end
+  return result
+end
 
 local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
@@ -550,7 +557,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
       -- The following command requires ripgrip executable in path
       -- see https://github.com/BurntSushi/ripgrep
-      vim.keymap.set('n', '<leader>?', builtin.live_grep, { desc = 'enhanced [/] search subdirs' })
+      vim.keymap.set('n', '<leader>?', function()
+        builtin.live_grep { glob_pattern = prefix_with_bang(excluded_folders_in_leader_sf) }
+      end, { desc = 'enhanced [/] search subdirs' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
