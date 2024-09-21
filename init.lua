@@ -642,7 +642,7 @@ require('lazy').setup({
 
           -- Find references for the word under your cursor.
           map('gr', function()
-            require('telescope.builtin').lsp_references { path_displAy = { 'tail' } }
+            require('telescope.builtin').lsp_references { show_line = false, path_display = { 'truncate' } }
           end, '[g]oto [r]eferences')
 
           -- Jump to the implementation of the word under your cursor.
