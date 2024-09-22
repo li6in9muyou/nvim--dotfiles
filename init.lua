@@ -1251,8 +1251,8 @@ require('lazy').setup({
         dim = false,
         match = '[a-zA-z0-9]',
       }
-      vim.api.nvim_set_hl(0, 'EyelinerPrimary', { fg = '#ffff00', underline = true, bold = true })
-      vim.api.nvim_set_hl(0, 'EyelinerSecondary', { fg = '#bbbb44', underline = true, bold = true })
+      vim.api.nvim_set_hl(0, 'EyelinerPrimary', { fg = '#ffff00', underline = true, italic = true })
+      vim.api.nvim_set_hl(0, 'EyelinerSecondary', { fg = '#cfcf2f', underline = true })
     end,
   },
 
