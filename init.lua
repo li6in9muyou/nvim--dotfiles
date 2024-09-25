@@ -551,7 +551,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sw', '<cmd>Easypick changed_files<cr>', { desc = "[s]earch files I'm [w]orking on (git changed)" })
       -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[s]earch recent files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>s.', function()
+        builtin.oldfiles { only_cwd = true }
+      end, { desc = '[s]earch recent files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
