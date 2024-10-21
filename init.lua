@@ -1364,7 +1364,7 @@ vim.keymap.set('n', '<leader>vr', ':%s/\\s\\+$//e', { desc = 't[r]im trailing wh
 vim.keymap.set(
   'n',
   '<leader>vu',
-  '%s/\\u\\(\\x\\{4}\\)/\\=nr2char(str2nr(submatch(1),16))/g',
+  ':%s/\\\\u\\(\\x\\{4\\}\\)/\\=nr2char(str2nr(submatch(1),16))/g',
   { desc = 'convert \\uABCD escape sequences to actual codepoint', noremap = true, silent = true }
 )
 vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
