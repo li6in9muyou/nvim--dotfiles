@@ -1362,7 +1362,7 @@ vim.filetype.add {
   },
 }
 
-vim.keymap.set('i', 'kkk', '<Esc>:w<CR>', { silent = true })
+vim.keymap.set('i', 'kk', '<Esc>:w<CR>', { silent = true })
 vim.keymap.set('n', '<leader>vr', ':%s/\\s\\+$//e', { desc = 't[r]im trailing whitespaces', noremap = true })
 vim.keymap.set(
   'n',
