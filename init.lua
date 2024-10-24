@@ -12,6 +12,9 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- do not add CRLF at eof
+vim.opt.fixeol = false
+
 -- when buffer is changed externally, automatically reload it
 vim.opt.autoread = true
 
