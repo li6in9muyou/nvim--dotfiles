@@ -1183,17 +1183,7 @@ require('lazy').setup({
           ['g\\'] = 'actions.toggle_trash',
         },
         view_options = {
-          -- This function defines what is considered a "hidden" file
-          is_hidden_file = function(name, _)
-            local is_important = false
-            for _, prefix in ipairs(important_files_in_oil) do
-              if vim.startswith(name, prefix) then
-                is_important = true
-                break
-              end
-            end
-            return (not is_important) and vim.startswith(name, '.')
-          end,
+          show_hidden = true,
         },
       }
     end,
