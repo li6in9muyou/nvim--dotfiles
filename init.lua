@@ -519,10 +519,26 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
+      local function oil_to_windows_dir(dir)
+        local prefix = 'oil:///'
+        if dir:sub(1, #prefix) == prefix then
+          local path = dir:sub(#prefix + 1)
+          path = path:sub(1, 1) .. ':' .. path:sub(2)
+          return path
+        end
+        return dir
+      end
+
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
+      -- utils.buffer_dir()
+      vim.keymap.set('n', '<leader>Sf', function()
+        builtin.find_files {
+          cwd = oil_to_windows_dir(require('telescope.utils').buffer_dir()),
+        }
+      end, { desc = '[S]earch [f]iles in parent of buffer' })
       vim.keymap.set('n', '<leader>sf', function()
         local function rg_file_path_exclusion_filters(exclude_dirs)
           local ans = {}
@@ -564,6 +580,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>?', function()
         builtin.live_grep { glob_pattern = prefix_with_bang(excluded_folders_in_leader_sf) }
       end, { desc = 'enhanced [/] search subdirs' })
+      vim.keymap.set('n', '<leader>S?', function()
+        builtin.live_grep {
+          cwd = oil_to_windows_dir(require('telescope.utils').buffer_dir()),
+        }
+      end, { desc = '<leader>? but in parent of buffer dir' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
