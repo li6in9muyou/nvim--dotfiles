@@ -200,7 +200,6 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mkdp_auto_close = 0
 
-local important_files_in_oil = { '.github', '.gitignore' }
 local excluded_folders_in_leader_sf = { 'node_modules', '.git' }
 local function prefix_with_bang(strings)
   local result = {}
