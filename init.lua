@@ -554,16 +554,16 @@ require('lazy').setup({
           find_command = { 'rg', '--files', '--color', 'never', '--hidden', spread(rg_file_path_exclusion_filters(excluded_folders_in_leader_sf)) },
         }
       end, { desc = '[s]earch [f]iles' })
-      vim.keymap.set('n', '<leader>sc', function()
+      vim.keymap.set('n', '<leader>sl', function()
         builtin.git_bcommits {
           prompt_title = 'git log <current file>',
           -- FIXME:
           -- the --follow switch is "SVN noob" pleaser, better alternatives include -G -S -L
           -- see https://gitster.livejournal.com/35628.html
           -- see https://stackoverflow.com/questions/5743739/how-to-really-show-logs-of-renamed-files-with-git
-          git_command = { 'git', 'log', '--format=%h %as %s', '--follow', '--abbrev-commit' },
+          git_command = { 'git', 'log', '--format=%h %an %as %d %s', '--follow', '--abbrev-commit', '--no-merges' },
         }
-      end, { desc = '[s]earch [c]ommits' })
+      end, { desc = '[s]earch git [l]ogs' })
       -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
       vim.keymap.set('n', '<leader>st', builtin.grep_string, { desc = '[s]earch [t]his word' })
       vim.keymap.set('n', '<leader>sw', '<cmd>Easypick changed_files<cr>', { desc = "[s]earch files I'm [w]orking on (git changed)" })
