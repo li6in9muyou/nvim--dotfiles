@@ -565,7 +565,10 @@ require('lazy').setup({
         }
       end, { desc = '[s]earch git [l]ogs' })
       -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
-      vim.keymap.set('n', '<leader>st', builtin.grep_string, { desc = '[s]earch [t]his word' })
+      vim.keymap.set('n', '<leader>st', function()
+        builtin.grep_string { grep_open_files = true }
+      end, { desc = '[s]earch [t]his word in open files' })
+      vim.keymap.set('n', '<leader>sT', builtin.grep_string, { desc = '[s]earch [t]his word in working dir' })
       vim.keymap.set('n', '<leader>sw', '<cmd>Easypick changed_files<cr>', { desc = "[s]earch files I'm [w]orking on (git changed)" })
       -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
