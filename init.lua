@@ -1425,5 +1425,13 @@ vim.opt.fillchars:append { diff = '╱' }
 vim.keymap.set('n', '88', '<cmd>w<cr>', { desc = 'alias of :w' })
 require('which-key').add { '88', hidden = true }
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  callback = function()
+    -- press <C-q> then the Esc key to enter ^[
+    vim.fn.setreg('c', '"8yoconsole.log(\'libq Z\', "8pa)kkTZch')
+  end,
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
