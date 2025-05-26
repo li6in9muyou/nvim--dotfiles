@@ -1430,6 +1430,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     -- press <C-q> then the Esc key to enter ^[
     vim.fn.setreg('c', '"8yoconsole.log(\'libq Z\', "8pa)kkTZch')
+    vim.fn.setreg('d', "iconsole.log('libq ')hi")
   end,
 })
 
