@@ -150,6 +150,39 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local DEFAULT_CONFORM_OPT = function()
+  return { timeout_ms = 4000 }
+end
+
+local RANGE_CONFORM_OPT = function(range)
+  return { range = range, timeout_ms = 4000 }
+end
+
+local function format_hunks(bufnr)
+  local hunks = require('gitsigns').get_hunks(bufnr)
+
+  if hunks == nil then
+    return
+  end
+
+  local format = require('conform').format
+  for i = #hunks, 1, -1 do
+    local hunk = hunks[i]
+    if hunk ~= nil and hunk.type ~= 'delete' then
+      local start = hunk.added.start
+      local last = start + hunk.added.count
+      -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
+      local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
+      local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() } }
+      format(RANGE_CONFORM_OPT(range))
+    end
+  end
+end
+
+vim.keymap.set({ 'n', 'v' }, '<leader>vf', function()
+  require('conform').format(DEFAULT_CONFORM_OPT())
+end, { desc = '[f]ormat whole file' })
+
 local default_cmp_sources = {
   { name = 'nvim_lsp' },
   { name = 'luasnip' },
@@ -892,11 +925,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        return {
-          timeout_ms = 4000,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-        }
+        format_hunks(bufnr)
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
