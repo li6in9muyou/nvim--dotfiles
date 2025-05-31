@@ -179,9 +179,26 @@ local function format_hunks(bufnr)
   end
 end
 
-vim.keymap.set({ 'n', 'v' }, '<leader>vf', function()
-  require('conform').format(DEFAULT_CONFORM_OPT())
-end, { desc = '[f]ormat whole file' })
+vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
+  local current_mode = vim.fn.mode()
+  if current_mode == 'v' or current_mode == '\22' then
+    return
+  elseif current_mode == 'V' then
+    local start_pos = vim.fn.getpos "'<"
+    local end_pos = vim.fn.getpos "'>"
+
+    local start_line = start_pos[2]
+    local end_line = end_pos[2]
+
+    local range = {
+      start = { start_line - 1, 0 },
+      ['end'] = { end_line - 1, -1 },
+    }
+    require('conform').format(RANGE_CONFORM_OPT(range))
+  else
+    require('conform').format(DEFAULT_CONFORM_OPT())
+  end
+end, { desc = '[f]ormat whole file/selection', silent = true })
 
 local default_cmp_sources = {
   { name = 'nvim_lsp' },
