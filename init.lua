@@ -1427,6 +1427,30 @@ vim.keymap.set(
   ':%s/\\\\u\\(\\x\\{4\\}\\)/\\=nr2char(str2nr(submatch(1),16))/g',
   { desc = 'convert \\uABCD escape sequences to actual codepoint', noremap = true, silent = true }
 )
+vim.keymap.set('v', '<leader>vU', function()
+  local selected = table.concat(vim.fn.getregion(vim.fn.getpos 'v', vim.fn.getpos '.', { type = vim.fn.mode() }))
+  local function toEscaped(input_string)
+    if not input_string or #input_string == 0 then
+      return ''
+    end
+
+    local output_parts = {}
+    local num_chars = vim.fn.strchars(input_string)
+
+    for char_idx = 0, num_chars - 1 do
+      local char = vim.fn.strcharpart(input_string, char_idx, 1)
+      local codepoint = vim.fn.char2nr(char)
+      local escaped_char = vim.fn.printf('\\u%04X', codepoint)
+      table.insert(output_parts, escaped_char)
+    end
+
+    return table.concat(output_parts)
+  end
+  local escaped = toEscaped(selected)
+
+  vim.fn.setreg('q', escaped, 'v')
+  vim.cmd 'normal! "qp'
+end, { desc = 'convert unicode characters to \\uABCD escape sequences', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>va', 'm0gg<S-v><S-g>', { desc = "select [a]ll in buffer, use '0 to go back", noremap = true, silent = true })
 
 -- warns if buffer is modified by others
