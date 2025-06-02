@@ -85,7 +85,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 6
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -1541,7 +1541,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     -- press <C-q> then the Esc key to enter ^[
     vim.fn.setreg('c', '"8yoconsole.log(\'libq Z\', "8pa)kkTZch')
-    vim.fn.setreg('d', "iconsole.log('libq ')hi")
+    vim.fn.setreg('d', "oconsole.log('libq ')hi")
   end,
 })
 
