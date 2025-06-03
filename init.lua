@@ -1549,5 +1549,25 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+local function sum_string_lengths(strings_table)
+  local total_length = 0
+  for _, str in ipairs(strings_table) do
+    total_length = total_length + vim.fn.strcharlen(str)
+  end
+  return total_length
+end
+
+require('conform').formatters.prettierd = {
+  range_args = function(_, ctx)
+    local bufnr = ctx.buf
+    local start = ctx.range.start[1]
+    local last = ctx.range['end'][1]
+
+    local char_offset_start = sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, 0, start - 1, false))
+    local char_offset_end = char_offset_start + sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, start - 1, last - 1, false))
+    return { '$FILENAME', '--range-start=' .. char_offset_start, '--range-end=' .. char_offset_end }
+  end,
+}
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
