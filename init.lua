@@ -560,6 +560,9 @@ require('lazy').setup({
             -- default mapping checkouts that commit, i don't like that
             mappings = { i = { ['<cr>'] = false }, n = { ['<cr>'] = false } },
           },
+          colorscheme = {
+            enable_preview = true,
+          },
         },
         extensions = {
           ['ui-select'] = {
