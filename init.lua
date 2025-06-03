@@ -1199,6 +1199,7 @@ require('lazy').setup({
         'csv',
         'diff',
         'dockerfile',
+        'gitignore',
         'git_config',
         'git_rebase',
         'gitattributes',
