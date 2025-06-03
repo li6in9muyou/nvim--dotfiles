@@ -232,15 +232,14 @@ end, { desc = 'suggest [w]ords', noremap = true })
 -- change \ to /
 vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
 
-local DEFAULT_BUFFER_IS_DISABLE_FORMAT_ON_SAVE = false
-local kb_toggle_format_on_save = '<leader>tf'
-vim.keymap.set('n', kb_toggle_format_on_save, function()
+local DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE = false
+vim.keymap.set('n', '<leader>tf', function()
   local bufnr = vim.api.nvim_get_current_buf()
-  if vim.b[bufnr].is_disable_format_on_save == nil then
-    vim.b[bufnr].is_disable_format_on_save = DEFAULT_BUFFER_IS_DISABLE_FORMAT_ON_SAVE
+  if vim.b[bufnr].enable_format_on_save == nil then
+    vim.b[bufnr].enable_format_on_save = DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE
   end
-  vim.b[bufnr].is_disable_format_on_save = not vim.b[bufnr].is_disable_format_on_save
-  vim.notify('format on save: ' .. (vim.b[bufnr].is_disable_format_on_save and 'off' or 'on') .. ' (this buffer)')
+  vim.b[bufnr].enable_format_on_save = not vim.b[bufnr].enable_format_on_save
+  vim.notify('format on save: ' .. (not vim.b[bufnr].enable_format_on_save and 'off' or 'on') .. ' (this buffer)')
 end, { desc = '[f]ormat on save', noremap = true })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -939,8 +938,8 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
-        if vim.b[bufnr].is_disable_format_on_save then
-          vim.notify(kb_toggle_format_on_save .. ' to toggle format on save')
+        if not vim.b[bufnr].enable_format_on_save then
+          vim.notify 'format on save is disabled (this buffer )'
           return nil
         end
         -- Disable "format_on_save lsp_fallback" for languages that don't
