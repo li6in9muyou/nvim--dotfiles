@@ -1533,6 +1533,7 @@ vim.keymap.set({ 'i', 'n' }, '<C-Down>', '<C-W>-', { desc = 'decrease height', n
 vim.keymap.set({ 'i', 'n' }, '<C-Up>', '<C-W>+', { desc = 'increase height', noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-Right>', '<C-W><', { desc = 'decrease width', noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-Left>', '<C-W>>', { desc = 'increase width', noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-t>', '<C-W>T', { desc = 'move to a new tabpage', noremap = true, silent = true })
 
 vim.opt.fillchars:append { diff = '╱' }
 
