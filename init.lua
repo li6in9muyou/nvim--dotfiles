@@ -1379,6 +1379,11 @@ require('lazy').setup({
     },
   },
   {
+    'ariel-frischer/bmessages.nvim',
+    event = 'CmdlineEnter',
+    opts = {},
+  },
+  {
     'axkirillov/easypick.nvim',
     config = function()
       local easypick = require 'easypick'
@@ -1578,5 +1583,6 @@ require('conform').formatters.prettierd = {
   end,
 }
 
+vim.keymap.set('x', '<leader>vr', ":'<,'>lua<CR>", { desc = '[r]un visual selection as Lua' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
