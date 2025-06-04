@@ -1565,9 +1565,16 @@ require('conform').formatters.prettierd = {
     local start = ctx.range.start[1]
     local last = ctx.range['end'][1]
 
-    local char_offset_start = sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, 0, start - 1, false))
-    local char_offset_end = char_offset_start + sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, start - 1, last - 1, false))
-    return { '$FILENAME', '--range-start=' .. char_offset_start, '--range-end=' .. char_offset_end }
+    local lines_before_start = start - 0 - 1
+    local lines_in_range = last - start + 1
+    local eol_len = vim.bo[bufnr].fileformat == 'dos' and 2 or 1
+    local eol_before_start = lines_before_start * eol_len
+    local eol_in_range = lines_in_range * eol_len
+
+    local start_by_char = sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, 0, start - 1, false)) + eol_before_start
+    local end_by_char = start_by_char + sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, start - 1, last - 1 + 1, false)) + eol_in_range
+
+    return { '$FILENAME', '--range-start=' .. start_by_char, '--range-end=' .. end_by_char }
   end,
 }
 
