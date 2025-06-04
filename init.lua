@@ -1194,6 +1194,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
+        'scss',
         'bash',
         'css',
         'csv',
