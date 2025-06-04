@@ -941,13 +941,14 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        if nil == vim.b[bufnr].enable_format_on_save then
+          vim.b[bufnr].enable_format_on_save = DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE
+        end
+
         if not vim.b[bufnr].enable_format_on_save then
           vim.notify 'format on save is disabled (this buffer )'
           return nil
         end
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
         format_hunks(bufnr)
       end,
       formatters_by_ft = {
