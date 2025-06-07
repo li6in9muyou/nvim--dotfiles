@@ -158,12 +158,40 @@ local RANGE_CONFORM_OPT = function(range)
   return { range = range, timeout_ms = 4000 }
 end
 
+local function count_char_offsets_for_hunks(bufnr, hunks)
+  local hunks = require('gitsigns').get_hunks(bufnr)
+  local last_line = 0
+  for _, hunk in ipairs(hunks) do
+    if hunk.added ~= nil then
+      local added_last_line = hunk.added.start + hunk.added.count - 1
+      if added_last_line > last_line then
+        last_line = added_last_line
+      end
+    end
+  end
+
+  local lines_with_hunks = vim.api.nvim_buf_get_lines(0, 0, last_line - 1 + 1, false)
+
+  local line_char_offset_table = {}
+  local total_length = 0
+  for i = 1, #lines_with_hunks, 1 do
+    total_length = total_length + vim.fn.strchars(lines_with_hunks[i])
+    line_char_offset_table[i] = total_length
+  end
+
+  line_char_offset_table[0] = 0
+  line_char_offset_table[#line_char_offset_table + 1] = line_char_offset_table[#line_char_offset_table]
+  return line_char_offset_table
+end
+
 local function format_hunks(bufnr)
   local hunks = require('gitsigns').get_hunks(bufnr)
 
   if hunks == nil then
     return
   end
+
+  local offset_table = count_char_offsets_for_hunks(bufnr, hunks)
 
   local format = require('conform').format
   for i = #hunks, 1, -1 do
@@ -173,7 +201,7 @@ local function format_hunks(bufnr)
       local last = start + hunk.added.count
       -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
       local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
-      local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() } }
+      local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
       format(RANGE_CONFORM_OPT(range))
     end
   end
@@ -1556,10 +1584,13 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-local function sum_string_lengths(strings_table)
+local function sum_string_lengths(strings_table, start_idx, end_idx)
+  start_idx = start_idx or 1
+  end_idx = end_idx or #strings_table
+
   local total_length = 0
-  for _, str in ipairs(strings_table) do
-    total_length = total_length + vim.fn.strchars(str)
+  for i = start_idx, end_idx do
+    total_length = total_length + vim.fn.strchars(strings_table[i])
   end
   return total_length
 end
@@ -1570,14 +1601,14 @@ require('conform').formatters.prettierd = {
     local start = ctx.range.start[1]
     local last = ctx.range['end'][1]
 
-    local lines_before_start = start - 0 - 1
+    local lines_before_start = start - 1
     local lines_in_range = last - start + 1
     local eol_len = vim.bo[bufnr].fileformat == 'dos' and 2 or 1
     local eol_before_start = lines_before_start * eol_len
     local eol_in_range = lines_in_range * eol_len
 
-    local start_by_char = sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, 0, start - 1, false)) + eol_before_start
-    local end_by_char = start_by_char + sum_string_lengths(vim.api.nvim_buf_get_lines(bufnr, start - 1, last - 1 + 1, false)) + eol_in_range
+    local start_by_char = ctx.range.offset_table[start - 1] + eol_before_start
+    local end_by_char = ctx.range.offset_table[last] + eol_before_start + eol_in_range
 
     return { '$FILENAME', '--range-start=' .. start_by_char, '--range-end=' .. end_by_char }
   end,
