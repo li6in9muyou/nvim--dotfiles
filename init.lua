@@ -1559,7 +1559,7 @@ vim.api.nvim_create_autocmd('FileType', {
 local function sum_string_lengths(strings_table)
   local total_length = 0
   for _, str in ipairs(strings_table) do
-    total_length = total_length + vim.fn.strcharlen(str)
+    total_length = total_length + vim.fn.strchars(str)
   end
   return total_length
 end
