@@ -1584,17 +1584,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-local function sum_string_lengths(strings_table, start_idx, end_idx)
-  start_idx = start_idx or 1
-  end_idx = end_idx or #strings_table
-
-  local total_length = 0
-  for i = start_idx, end_idx do
-    total_length = total_length + vim.fn.strchars(strings_table[i])
-  end
-  return total_length
-end
-
 require('conform').formatters.prettierd = {
   range_args = function(_, ctx)
     local bufnr = ctx.buf
