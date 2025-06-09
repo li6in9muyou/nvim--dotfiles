@@ -1579,7 +1579,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   callback = function()
     -- press <C-q> then the Esc key to enter ^[
-    vim.fn.setreg('c', '"8yoconsole.log(\'libq Z\', "8pa)kkTZch')
+    vim.fn.setreg('c', '"8yoconsole.log(\'libq Z\', "8pa)TZch')
     vim.fn.setreg('d', "oconsole.log('libq ')hi")
   end,
 })
