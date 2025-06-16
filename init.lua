@@ -184,6 +184,7 @@ local function count_char_offsets_for_hunks(bufnr, hunks)
   return line_char_offset_table
 end
 
+local book
 local function format_hunks(bufnr)
   local hunks = require('gitsigns').get_hunks(bufnr)
 
@@ -196,6 +197,7 @@ local function format_hunks(bufnr)
   local format = require('conform').format
   for i = #hunks, 1, -1 do
     local hunk = hunks[i]
+    book.debug('libq fmthunk/hunk', hunk)
     if hunk ~= nil and hunk.type ~= 'delete' then
       local start = hunk.added.start
       local last = start + hunk.added.count
@@ -203,6 +205,8 @@ local function format_hunks(bufnr)
       local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
       local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
       format(RANGE_CONFORM_OPT(range))
+    else
+      book.debug 'libq fmthunk/skip hunk.type==delete'
     end
   end
 end
@@ -1595,10 +1599,26 @@ require('conform').formatters.prettierd = {
     local eol_len = vim.bo[bufnr].fileformat == 'dos' and 2 or 1
     local eol_before_start = lines_before_start * eol_len
     local eol_in_range = lines_in_range * eol_len
+    book.debug(
+      'libq rangeargs/enter',
+      'ctx',
+      ctx,
+      'lines_before_start',
+      lines_before_start,
+      'lines_in_range',
+      lines_in_range,
+      'eol_len',
+      eol_len,
+      'eol_before_start',
+      eol_before_start,
+      'eol_in_range',
+      eol_in_range
+    )
 
     local start_by_char = ctx.range.offset_table[start - 1] + eol_before_start
     local end_by_char = ctx.range.offset_table[last] + eol_before_start + eol_in_range
 
+    book.info('libq rangeargs/startend', start_by_char, end_by_char)
     return { '$FILENAME', '--range-start=' .. start_by_char, '--range-end=' .. end_by_char }
   end,
 }
@@ -1606,5 +1626,22 @@ require('conform').formatters.prettierd = {
 vim.keymap.set('x', '<leader>vr', ":'<,'>lua<CR>", { desc = '[r]un visual selection as Lua' })
 
 vim.opt.fileformats = 'unix,dos'
+
+book = require('logger'):new { log_level = 'debug', prefix = 'libq', echo_messages = true }
+local show_libq_debug_log = false
+local function sync_logger_level()
+  if true == show_libq_debug_log then
+    book.set_log_level(vim.log.levels.DEBUG)
+  else
+    book.set_log_level(vim.log.levels.OFF)
+  end
+end
+sync_logger_level()
+vim.keymap.set('n', '<leader>td', function()
+  show_libq_debug_log = not show_libq_debug_log
+  sync_logger_level()
+  vim.notify('libq debug: ' .. (show_libq_debug_log and 'on' or 'off'))
+end, { desc = '[d]ebug messages', noremap = true })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
