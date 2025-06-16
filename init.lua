@@ -265,7 +265,6 @@ vim.keymap.set('n', '<leader>tw', function()
   vim.notify('suggest words: ' .. (is_suggesting_words and 'on' or 'off'))
 end, { desc = 'suggest [w]ords', noremap = true })
 
--- change \ to /
 vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
 
 local DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE = false
