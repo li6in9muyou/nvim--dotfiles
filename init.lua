@@ -226,9 +226,13 @@ vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
       start = { start_line - 1, 0 },
       ['end'] = { end_line - 1, -1 },
     }
-    require('conform').format(RANGE_CONFORM_OPT(range))
+    require('conform').format(RANGE_CONFORM_OPT(range), function()
+      vim.cmd 'w'
+    end)
   else
-    require('conform').format(DEFAULT_CONFORM_OPT())
+    require('conform').format(DEFAULT_CONFORM_OPT(), function()
+      vim.cmd 'w'
+    end)
   end
 end, { desc = '[f]ormat whole file/selection', silent = true })
 
@@ -390,19 +394,19 @@ require('lazy').setup({
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = '[h]unk [r]estore' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = '[h]unk [s]tage all!!!' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = '[h]unk [u]ndo stage' })
+        -- map('n', '<leader>hu', gs.undo_stage_hunk, { desc = '[h]unk [u]ndo stage' })
         -- map('n', '<leader>hR', gs.reset_buffer, { desc = '[h]unk [R]estore all!!!' })
         map('n', '<leader>hp', gs.preview_hunk, { desc = '[h]unk [p]review' })
-        map('n', '<leader>hb', function()
-          gs.blame_line { full = true }
-        end, { desc = '[h]unk [b]lame' })
+        -- map('n', '<leader>hb', function()
+        --   gs.blame_line { full = true }
+        -- end, { desc = '[h]unk [b]lame' })
         -- map('n', '<leader>hd', gs.diffthis, { desc = '[h]unk [d]iff' })
         -- map('n', '<leader>hD', function()
         --   gs.diffthis '~'
         -- end, { desc = '[h]unk [d]iff against ~' })
 
-        map('n', '<leader>td', gs.toggle_deleted, { desc = '[d]elete' })
-        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[b]lame' })
+        -- map('n', '<leader>td', gs.toggle_deleted, { desc = '[d]elete' })
+        -- map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = '[b]lame' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
