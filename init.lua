@@ -1604,5 +1604,7 @@ require('conform').formatters.prettierd = {
 }
 
 vim.keymap.set('x', '<leader>vr', ":'<,'>lua<CR>", { desc = '[r]un visual selection as Lua' })
+
+vim.opt.fileformats = 'unix,dos'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
