@@ -598,13 +598,6 @@ require('lazy').setup({
           colorscheme = {
             enable_preview = true,
           },
-          live_grep = {
-            mappings = {
-              i = {
-                ['<CR>'] = 'file_vsplit',
-              },
-            },
-          },
         },
         extensions = {
           ['ui-select'] = {
