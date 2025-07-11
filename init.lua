@@ -1161,6 +1161,11 @@ require('lazy').setup({
       on_colors = function(colors)
         colors.bg = '#000000'
       end,
+      on_highlights = function(hl, colors)
+        hl.LineNrAbove = { fg = colors.dark3 }
+        hl.LineNrBelow = { fg = colors.dark3 }
+        hl.CursorLineNr = { fg = colors.green }
+      end,
     },
   },
 
