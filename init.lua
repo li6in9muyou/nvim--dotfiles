@@ -883,7 +883,7 @@ require('lazy').setup({
         ['typescript-language-server'] = {},
         stylua = {},
         emmet_language_server = {
-          filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact' },
+          filetypes = { 'css', 'html', 'javascriptreact', 'less', 'sass', 'scss', 'typescriptreact' },
           -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
           -- **Note:** only the options listed in the table are supported.
           init_options = {
@@ -1259,6 +1259,8 @@ require('lazy').setup({
         'python',
         'sql',
         'typescript',
+        'tsx',
+        'jsonc',
         'vim',
         'vimdoc',
         'yaml',
