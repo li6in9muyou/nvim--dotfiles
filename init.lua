@@ -1007,7 +1007,6 @@ require('lazy').setup({
   },
 
   -- must list dependencies before nvim-cmp otherwise cmp_luasnip does not work
-  'saadparwaiz1/cmp_luasnip',
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -1036,8 +1035,6 @@ require('lazy').setup({
           -- },
         },
       },
-      'saadparwaiz1/cmp_luasnip',
-
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
@@ -1119,7 +1116,6 @@ require('lazy').setup({
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'luasnip' },
           { name = 'path' },
           { name = 'buffer' },
         },
