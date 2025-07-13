@@ -1006,6 +1006,7 @@ require('lazy').setup({
     },
   },
 
+  'amarakon/nvim-cmp-buffer-lines',
   -- must list dependencies before nvim-cmp otherwise cmp_luasnip does not work
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -1038,6 +1039,7 @@ require('lazy').setup({
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
+      'amarakon/nvim-cmp-buffer-lines',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
@@ -1116,8 +1118,9 @@ require('lazy').setup({
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'path' },
+          { name = 'buffer-lines' },
           { name = 'buffer' },
+          { name = 'path' },
         },
       }
       require('luasnip.loaders.from_vscode').lazy_load()
