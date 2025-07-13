@@ -1395,7 +1395,7 @@ require('lazy').setup({
     },
   },
   {
-    'jinh0/eyeliner.nvim',
+    'li6in9muyou/eyeliner.nvim',
     config = function()
       require('eyeliner').setup {
         highlight_on_key = false,
@@ -1403,7 +1403,7 @@ require('lazy').setup({
         match = '[a-zA-z0-9]',
       }
       vim.api.nvim_set_hl(0, 'EyelinerPrimary', { fg = '#ffff00', underline = true, italic = true })
-      vim.api.nvim_set_hl(0, 'EyelinerSecondary', { fg = '#00ff66', underline = true })
+      vim.api.nvim_set_hl(0, 'EyelinerSecondary', { fg = '#ff00ff', underline = true, italic = true })
     end,
   },
 
