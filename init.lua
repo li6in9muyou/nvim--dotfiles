@@ -659,6 +659,18 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>st', function()
         builtin.grep_string { grep_open_files = true }
       end, { desc = '[s]earch [t]his word in open files' })
+      vim.keymap.set('x', '<leader>st', function()
+        local start = vim.fn.getpos 'v'
+        local last = vim.fn.getpos '.'
+        local selected = vim.fn.getregion(start, last)
+        builtin.grep_string { search = selected[1], grep_open_files = true }
+      end, { desc = '[s]earch [t]his word in open files' })
+      vim.keymap.set('x', '<leader>sT', function()
+        local start = vim.fn.getpos 'v'
+        local last = vim.fn.getpos '.'
+        local selected = vim.fn.getregion(start, last)
+        builtin.grep_string { search = selected[1] }
+      end, { desc = '[s]earch [t]his word in open files' })
       vim.keymap.set('n', '<leader>sT', builtin.grep_string, { desc = '[s]earch [t]his word in working dir' })
       vim.keymap.set('n', '<leader>sw', '<cmd>Easypick changed_files<cr>', { desc = "[s]earch files I'm [w]orking on (git changed)" })
       -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [D]iagnostics' })
