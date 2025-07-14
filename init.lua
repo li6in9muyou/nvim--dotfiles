@@ -1326,12 +1326,6 @@ require('lazy').setup({
   },
 
   {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-  },
-
-  {
     'stevearc/oil.nvim',
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -1491,44 +1485,6 @@ require('lazy').setup({
 -- Like many other themes, this one has different styles, and you could load
 -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 vim.cmd.colorscheme 'tokyonight-night'
-
-local harpoon = require 'harpoon'
-
--- REQUIRED
-harpoon:setup {}
--- REQUIRED
-
-local keymap_helper = function(mode, keys, func, desc)
-  vim.keymap.set(mode, keys, func, { desc = desc })
-end
-
-keymap_helper('n', '<leader>m', function()
-  harpoon:list():add()
-end, 'harpoon: [a]dd current buffer')
-keymap_helper('n', "<leader>'", function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end, 'harpoon: list [m]arks')
-
-keymap_helper('n', '<leader>1', function()
-  harpoon:list():select(1)
-end, 'go to [1]')
-keymap_helper('n', '<leader>2', function()
-  harpoon:list():select(2)
-end, 'go to [2]')
-keymap_helper('n', '<leader>3', function()
-  harpoon:list():select(3)
-end, 'go to [3]')
-keymap_helper('n', '<leader>4', function()
-  harpoon:list():select(4)
-end, 'go to [4]')
-
--- Toggle previous & next buffers stored within Harpoon list
-keymap_helper('n', '<leader>pp', function()
-  harpoon:list():prev()
-end, 'go to [p]revious')
-keymap_helper('n', '<leader>pn', function()
-  harpoon:list():next()
-end, 'go to [n]ext')
 
 vim.filetype.add {
   extension = {
