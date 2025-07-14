@@ -1018,6 +1018,8 @@ require('lazy').setup({
     },
   },
 
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-buffer',
   'amarakon/nvim-cmp-buffer-lines',
   -- must list dependencies before nvim-cmp otherwise cmp_luasnip does not work
   { -- Autocompletion
@@ -1130,8 +1132,13 @@ require('lazy').setup({
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'buffer-lines' },
           { name = 'buffer' },
+          {
+            name = 'buffer-lines',
+            option = {
+              leading_whitespace = false,
+            },
+          },
           { name = 'path' },
         },
       }
