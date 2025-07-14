@@ -1674,5 +1674,7 @@ vim.keymap.set('n', '<leader>td', function()
   vim.notify('libq debug: ' .. (show_libq_debug_log and 'on' or 'off'))
 end, { desc = '[d]ebug messages', noremap = true })
 
+vim.api.nvim_set_keymap('n', '<C-t><C-t>', ':tabc<CR>', { noremap = true, silent = true })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
