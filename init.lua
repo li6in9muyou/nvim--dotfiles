@@ -694,6 +694,9 @@ require('lazy').setup({
           cwd = oil_to_windows_dir(require('telescope.utils').buffer_dir()),
         }
       end, { desc = '<leader>? but in parent of buffer dir' })
+      vim.keymap.set('n', '<leader>m', function()
+        builtin.marks()
+      end, { desc = 'search marks' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
