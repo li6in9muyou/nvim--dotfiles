@@ -595,8 +595,28 @@ require('lazy').setup({
         },
         pickers = {
           git_bcommits = {
-            -- default mapping checkouts that commit, i don't like that
-            mappings = { i = { ['<cr>'] = false }, n = { ['<cr>'] = false } },
+            mappings = {
+              i = {
+                ['<CR>'] = function(prompt_bufnr)
+                  local actions = require 'telescope.actions'
+                  local action_state = require 'telescope.actions.state'
+                  local selection = action_state.get_selected_entry()
+                  local commit_hash = selection.value
+                  actions.close(prompt_bufnr)
+                  vim.cmd('DiffviewOpen ' .. commit_hash)
+                end,
+              },
+              n = {
+                ['<CR>'] = function(prompt_bufnr)
+                  local actions = require 'telescope.actions'
+                  local action_state = require 'telescope.actions.state'
+                  local selection = action_state.get_selected_entry()
+                  local commit_hash = selection.value
+                  actions.close(prompt_bufnr)
+                  vim.cmd('DiffviewOpen ' .. commit_hash)
+                end,
+              },
+            },
           },
           colorscheme = {
             enable_preview = true,
