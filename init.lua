@@ -573,6 +573,9 @@ require('lazy').setup({
           mappings = {
             i = {
               ['<esc>'] = require('telescope.actions').close,
+              ['<C-q>'] = require('telescope.actions').select_vertical,
+              ['<C-f>'] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
+              ['<C-v>'] = false,
             },
           },
           path_display = { 'truncate' },
