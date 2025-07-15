@@ -268,6 +268,15 @@ local function prefix_with_bang(strings)
   return result
 end
 
+local function git_bcommits_telescope_mapping_handler(prompt_bufnr)
+  local actions = require 'telescope.actions'
+  local action_state = require 'telescope.actions.state'
+  local selection = action_state.get_selected_entry()
+  local commit_hash = selection.value
+  actions.close(prompt_bufnr)
+  vim.cmd('DiffviewFileHistory --range=' .. commit_hash .. ' --no-merges')
+end
+
 local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
 --
@@ -568,24 +577,10 @@ require('lazy').setup({
           git_bcommits = {
             mappings = {
               i = {
-                ['<CR>'] = function(prompt_bufnr)
-                  local actions = require 'telescope.actions'
-                  local action_state = require 'telescope.actions.state'
-                  local selection = action_state.get_selected_entry()
-                  local commit_hash = selection.value
-                  actions.close(prompt_bufnr)
-                  vim.cmd('DiffviewOpen ' .. commit_hash)
-                end,
+                ['<CR>'] = git_bcommits_telescope_mapping_handler,
               },
               n = {
-                ['<CR>'] = function(prompt_bufnr)
-                  local actions = require 'telescope.actions'
-                  local action_state = require 'telescope.actions.state'
-                  local selection = action_state.get_selected_entry()
-                  local commit_hash = selection.value
-                  actions.close(prompt_bufnr)
-                  vim.cmd('DiffviewOpen ' .. commit_hash)
-                end,
+                ['<CR>'] = git_bcommits_telescope_mapping_handler,
               },
             },
           },
