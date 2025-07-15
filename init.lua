@@ -236,35 +236,6 @@ vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
   end
 end, { desc = '[f]ormat whole file/selection', silent = true })
 
-local default_cmp_sources = {
-  { name = 'nvim_lsp' },
-  { name = 'luasnip' },
-  { name = 'path' },
-  { name = 'buffer' },
-}
-local text_cmp_sources = {
-  { name = 'nvim_lsp' },
-  { name = 'luasnip' },
-  { name = 'path' },
-  { name = 'buffer' },
-
-  { name = 'dictionary' },
-}
-local is_suggesting_words = false
-vim.keymap.set('n', '<leader>tw', function()
-  is_suggesting_words = not is_suggesting_words
-  if is_suggesting_words then
-    require('cmp').setup {
-      sources = text_cmp_sources,
-    }
-  else
-    require('cmp').setup {
-      sources = default_cmp_sources,
-    }
-  end
-  vim.notify('suggest words: ' .. (is_suggesting_words and 'on' or 'off'))
-end, { desc = 'suggest [w]ords', noremap = true })
-
 vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
 
 local DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE = false
