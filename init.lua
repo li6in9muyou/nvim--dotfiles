@@ -422,7 +422,6 @@ require('lazy').setup({
         { '<leader>s', group = '[s]earch' },
         { '<leader>w', group = '[w]orkspace' },
         { '<leader>t', group = '[t]oggle features' },
-        { '<leader>p', group = 'har[p]oon' },
       }
 
       require('which-key').add {
