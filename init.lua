@@ -1362,8 +1362,16 @@ require('lazy').setup({
   },
 
   {
-    'sindrets/diffview.nvim',
+    'li6in9muyou/diffview.nvim',
     opts = {
+      file_history_panel = {
+        max_len_commit_subject = 9999,
+        win_config = {
+          win_opts = {
+            wrap = true,
+          },
+        },
+      },
       keymaps = {
         file_history_panel = {
           y = false,
