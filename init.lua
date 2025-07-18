@@ -274,7 +274,8 @@ local function git_bcommits_telescope_mapping_handler(prompt_bufnr)
   local selection = action_state.get_selected_entry()
   local commit_hash = selection.value
   actions.close(prompt_bufnr)
-  vim.cmd('DiffviewFileHistory --range=' .. commit_hash .. ' --no-merges')
+  local current_buffer_path = vim.api.nvim_buf_get_name(0)
+  vim.cmd('DiffviewFileHistory ' .. current_buffer_path .. ' --range=' .. commit_hash .. ' --no-merges')
 end
 
 local prettier_formatters = { 'prettierd' }
