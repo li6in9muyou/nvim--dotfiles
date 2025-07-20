@@ -278,6 +278,18 @@ local function git_bcommits_telescope_mapping_handler(prompt_bufnr)
   vim.cmd('DiffviewFileHistory ' .. current_buffer_path .. ' --range=' .. commit_hash .. ' --no-merges')
 end
 
+local function find_git_root_or_cwd()
+  local git_root_output = vim.fn.system { 'git', 'rev-parse', '--show-toplevel' }
+  local git_root = git_root_output:gsub('%s*$', '')
+
+  if vim.v.shell_error == 0 and git_root ~= '' then
+    return git_root
+  else
+    return vim.fn.getcwd()
+  end
+end
+local git_root = find_git_root_or_cwd()
+
 local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
 --
@@ -1466,7 +1478,7 @@ require('lazy').setup({
           {
             name = 'changed_files',
             command = 'git diff --name-only',
-            previewer = easypick.previewers.file_diff(),
+            previewer = easypick.previewers.file_diff { cwd = git_root },
           },
         },
       }
