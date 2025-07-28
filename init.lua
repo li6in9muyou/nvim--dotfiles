@@ -268,6 +268,12 @@ local function prefix_with_bang(strings)
   return result
 end
 
+vim.keymap.set('n', '<leader>vp', function()
+  local fullpath = vim.fn.expand '%:p'
+  vim.fn.setreg('+', fullpath)
+  vim.notify('copy file path: ' .. fullpath)
+end, { noremap = true, silent = true, desc = 'copy file [p]ath' })
+
 local function git_bcommits_telescope_mapping_handler(prompt_bufnr)
   local actions = require 'telescope.actions'
   local action_state = require 'telescope.actions.state'
