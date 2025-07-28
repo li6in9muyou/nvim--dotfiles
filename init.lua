@@ -1651,6 +1651,9 @@ vim.keymap.set('x', '<leader>vr', ":'<,'>lua<CR>", { desc = '[r]un visual select
 vim.opt.fileformats = 'unix,dos'
 
 book = require('logger'):new { log_level = 'debug', prefix = 'libq', echo_messages = true }
+_G.book = function(...)
+  book.debug(...)
+end
 local show_libq_debug_log = false
 local function sync_logger_level()
   if true == show_libq_debug_log then
