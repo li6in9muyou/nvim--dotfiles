@@ -247,7 +247,7 @@ end, { desc = '[f]ormat whole file/selection', silent = true })
 
 vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
 
-local DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE = false
+local DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE = true
 vim.keymap.set('n', '<leader>tf', function()
   local bufnr = vim.api.nvim_get_current_buf()
   if vim.b[bufnr].enable_format_on_save == nil then
