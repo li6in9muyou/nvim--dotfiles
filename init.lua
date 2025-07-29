@@ -1,3 +1,5 @@
+require 'custom.timer'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -186,9 +188,11 @@ end
 
 local book
 local function format_hunks(bufnr)
+  time 'libq fmthunks'
   local hunks = require('gitsigns').get_hunks(bufnr)
 
   if hunks == nil then
+    book.debug 'libq fmthunk/skip because hunks is nil'
     return
   end
 
@@ -196,6 +200,7 @@ local function format_hunks(bufnr)
 
   local format = require('conform').format
   for i = #hunks, 1, -1 do
+    time('libq fmthunks/fmt ' .. i)
     local hunk = hunks[i]
     book.debug('libq fmthunk/hunk', hunk)
     if hunk ~= nil and hunk.type ~= 'delete' then
@@ -204,11 +209,15 @@ local function format_hunks(bufnr)
       -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
       local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
       local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
+      time('libq fmthunk/conformformat ' .. i)
       format(RANGE_CONFORM_OPT(range))
+      time_end('libq fmthunk/conformformat ' .. i)
     else
       book.debug 'libq fmthunk/skip hunk.type==delete'
     end
+    time_end('libq fmthunks/fmt ' .. i)
   end
+  time_end 'libq fmthunks'
 end
 
 vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
@@ -998,6 +1007,7 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        book.debug('libq formatonsave', bufnr)
         if nil == vim.b[bufnr].enable_format_on_save then
           vim.b[bufnr].enable_format_on_save = DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE
         end
@@ -1613,6 +1623,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 require('conform').formatters.prettierd = {
   range_args = function(_, ctx)
+    time 'libq rangeargs'
     local bufnr = ctx.buf
     local start = ctx.range.start[1]
     local last = ctx.range['end'][1]
@@ -1642,6 +1653,7 @@ require('conform').formatters.prettierd = {
     local end_by_char = ctx.range.offset_table[last] + eol_before_start + eol_in_range
 
     book.info('libq rangeargs/startend', start_by_char, end_by_char)
+    time_end 'libq rangeargs'
     return { '$FILENAME', '--range-start=' .. start_by_char, '--range-end=' .. end_by_char }
   end,
 }
