@@ -60,8 +60,8 @@ vim.opt.wrap = true
 vim.opt.breakat = ' ^I!@*-+;:,./?(){}[]'
 vim.opt.linebreak = true
 
--- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+-- Make gutter bigger to fit both gitsigns and errors
+vim.opt.signcolumn = 'yes:3'
 
 -- Decrease update time
 vim.opt.updatetime = 250
