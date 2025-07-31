@@ -6,7 +6,7 @@ local timers = {}
 -- @param label string A unique label for this timer.
 function _G.time(label)
   if not label or type(label) ~= 'string' then
-    print('time: Label must be a string.')
+    book.debug 'time: Label must be a string.'
     return
   end
   timers[label] = vim.uv.hrtime() -- Stores the high-resolution nanosecond timestamp
@@ -16,13 +16,13 @@ end
 -- @param label string The label of the timer to end.
 function _G.time_end(label)
   if not label or type(label) ~= 'string' then
-    vim.notify('time_end: Label must be a string.', vim.log.levels.WARN)
+    book.debug('time_end: Label must be a string.', vim.log.levels.WARN)
     return
   end
 
   local start_time = timers[label]
   if not start_time then
-    vim.notify('time_end: Timer "' .. label .. '" was not started or already ended.', vim.log.levels.WARN)
+    book.debug('time_end: Timer "' .. label .. '" was not started or already ended.', vim.log.levels.WARN)
     return
   end
 
@@ -34,7 +34,7 @@ function _G.time_end(label)
   -- Convert to milliseconds for readability
   local elapsed_ms = elapsed_ns / 1e6
 
-  print(string.format('Timer "%s": %.3f ms', label, elapsed_ms))
+  book.debug(string.format('Timer "%s": %.3f ms', label, elapsed_ms))
 
   -- Clean up the timer
   timers[label] = nil
