@@ -1,4 +1,5 @@
 require 'custom.timer'
+local is_current_buffer_untracked = require('custom.git_stuff').is_current_buffer_untracked
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -189,6 +190,12 @@ end
 local function format_hunks(bufnr)
   time 'libq fmthunks'
   local hunks = require('gitsigns').get_hunks(bufnr)
+
+  if is_current_buffer_untracked() then
+    book.debug 'libq fmthunk/wholefile because it is untracked'
+    require('conform').format(DEFAULT_CONFORM_OPT())
+    return
+  end
 
   if hunks == nil then
     book.debug 'libq fmthunk/skip because hunks is nil'
