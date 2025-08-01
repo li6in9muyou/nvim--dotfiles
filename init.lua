@@ -62,7 +62,7 @@ vim.opt.breakat = ' ^I!@*-+;:,./?(){}[]'
 vim.opt.linebreak = true
 
 -- Make gutter bigger to fit both gitsigns and errors
-vim.opt.signcolumn = 'yes:3'
+vim.opt.signcolumn = 'yes:2'
 
 -- Decrease update time
 vim.opt.updatetime = 250
