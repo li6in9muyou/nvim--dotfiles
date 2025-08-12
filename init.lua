@@ -1448,11 +1448,6 @@ require('lazy').setup({
     },
   },
   {
-    'ariel-frischer/bmessages.nvim',
-    event = 'CmdlineEnter',
-    opts = {},
-  },
-  {
     'axkirillov/easypick.nvim',
     config = function()
       local easypick = require 'easypick'
