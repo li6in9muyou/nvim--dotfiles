@@ -1019,7 +1019,7 @@ require('lazy').setup({
         end
 
         if not vim.b[bufnr].enable_format_on_save then
-          vim.notify 'format on save is disabled (this buffer )'
+          vim.notify 'format on save is disabled (this buffer)'
           return nil
         end
         format_hunks(bufnr)
