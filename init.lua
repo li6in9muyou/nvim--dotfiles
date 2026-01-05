@@ -67,6 +67,16 @@ vim.opt.signcolumn = 'yes:2'
 -- Decrease update time
 vim.opt.updatetime = 250
 
+-- it's just annoying
+vim.opt.swapfile = false
+vim.opt.updatetime = 200
+
+-- follow indent of the previous line after o/O or whatever
+vim.opt.autoindent = true
+
+-- smart indent will insert more indent after some key words or symbols in C and C-like languages
+vim.opt.smartindent = true
+
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
@@ -88,7 +98,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 6
+vim.opt.scrolloff = 4
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
