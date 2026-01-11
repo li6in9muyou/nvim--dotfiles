@@ -223,7 +223,6 @@ local function find_git_root_or_cwd()
 end
 local git_root = find_git_root_or_cwd()
 
-local prettier_formatters = { 'prettierd' }
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -938,20 +937,20 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        html = prettier_formatters,
-        css = prettier_formatters,
-        less = prettier_formatters,
+        html = { 'prettierd' },
+        css = { 'prettierd' },
+        less = { 'prettierd' },
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = prettier_formatters,
-        typescript = prettier_formatters,
-        javascriptreact = prettier_formatters,
-        typescriptreact = prettier_formatters,
-        markdown = prettier_formatters,
-        json = prettier_formatters,
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
+        markdown = { 'prettierd' },
+        json = { 'prettierd' },
       },
     },
   },
@@ -1493,42 +1492,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require('conform').formatters.prettierd = {
-  range_args = function(_, ctx)
-    time 'libq rangeargs'
-    local bufnr = ctx.buf
-    local start = ctx.range.start[1]
-    local last = ctx.range['end'][1]
-
-    local lines_before_start = start - 1
-    local lines_in_range = last - start + 1
-    local eol_len = vim.bo[bufnr].fileformat == 'dos' and 2 or 1
-    local eol_before_start = lines_before_start * eol_len
-    local eol_in_range = lines_in_range * eol_len
-    book.debug(
-      'libq rangeargs/enter',
-      'ctx',
-      ctx,
-      'lines_before_start',
-      lines_before_start,
-      'lines_in_range',
-      lines_in_range,
-      'eol_len',
-      eol_len,
-      'eol_before_start',
-      eol_before_start,
-      'eol_in_range',
-      eol_in_range
-    )
-
-    local start_by_char = ctx.range.offset_table[start - 1] + eol_before_start
-    local end_by_char = ctx.range.offset_table[last] + eol_before_start + eol_in_range
-
-    book.info('libq rangeargs/startend', start_by_char, end_by_char)
-    time_end 'libq rangeargs'
-    return { '$FILENAME', '--range-start=' .. start_by_char, '--range-end=' .. end_by_char }
-  end,
-}
+require 'prettier_stuff'
 
 vim.keymap.set('x', '<leader>vr', ":'<,'>lua<CR>", { desc = '[r]un visual selection as Lua' })
 
