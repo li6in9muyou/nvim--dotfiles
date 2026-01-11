@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
-  local P = require('prettier_stuff')
+  local P = require 'prettier_stuff'
   local current_mode = vim.fn.mode()
   if current_mode == 'v' or current_mode == '\22' then
     return
@@ -826,22 +826,6 @@ require('lazy').setup({
         },
       }
     end,
-  },
-
-  -- install with yarn or npm
-  {
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    -- if error occurs, just run this yourself
-    build = 'cd app && yarn',
-    init = function()
-      vim.g.mkdp_filetypes = { 'markdown' }
-      vim.g.mkdp_port = '13334'
-      vim.g.mkdp_page_title = '${name}.md'
-      vim.g.mkdp_images_path = './assets'
-      vim.keymap.set('n', '<leader>vm', '<cmd>MarkdownPreview<cr>', { desc = 'start [m]arkdown preview', noremap = true, silent = true })
-    end,
-    ft = { 'markdown' },
   },
 
   { -- Autoformat
