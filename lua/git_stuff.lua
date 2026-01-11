@@ -28,7 +28,7 @@ function M.is_current_buffer_untracked()
 
   book.debug('libq icbu/relpath', relative_path)
 
-  local tracked_check = vim.fn.system { 'git', '-C', git_root, 'ls-files', '--error-unmatch', '--', relative_path }
+  vim.fn.system { 'git', '-C', git_root, 'ls-files', '--error-unmatch', '--', relative_path }
   if vim.v.shell_error == 0 then
     book.debug 'libq icbu/returnfalse tracked_check'
     return false
