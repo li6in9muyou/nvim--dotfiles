@@ -1,6 +1,6 @@
 require 'options'
-require 'custom.timer'
-local is_current_buffer_untracked = require('custom.git_stuff').is_current_buffer_untracked
+require 'timer'
+local is_current_buffer_untracked = require('git_stuff').is_current_buffer_untracked
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -1308,7 +1308,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
   {
     'folke/noice.nvim',
     dependencies = {
