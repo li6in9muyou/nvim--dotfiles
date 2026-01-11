@@ -1418,7 +1418,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require('prettier_stuff')
+require 'prettier_stuff'
 
 vim.keymap.set('x', '<leader>vl', ":'<,'>lua<CR>", { desc = '[r]un visual selection as Lua' })
 
