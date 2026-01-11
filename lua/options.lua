@@ -12,13 +12,13 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- do not add CRLF at eof
+-- Do not add CRLF at eof
 vim.opt.fixeol = false
 
--- when buffer is changed externally, automatically reload it
+-- When buffer is changed externally, automatically reload it
 vim.opt.autoread = true
 
--- when I tab, insert spaces
+-- When I tab, insert spaces
 vim.opt.expandtab = true
 
 -- Make line numbers default
@@ -64,14 +64,14 @@ vim.opt.signcolumn = 'yes:2'
 -- Decrease update time
 vim.opt.updatetime = 250
 
--- it's just annoying
+-- It's just annoying
 vim.opt.swapfile = false
 vim.opt.updatetime = 200
 
--- follow indent of the previous line after o/O or whatever
+-- Follow indent of the previous line after o/O or whatever
 vim.opt.autoindent = true
 
--- smart indent will insert more indent after some key words or symbols in C and C-like languages
+-- Smart indent will insert more indent after some key words or symbols in C and C-like languages
 vim.opt.smartindent = true
 
 -- Decrease mapped sequence wait time
@@ -86,6 +86,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
+---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '<->', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
