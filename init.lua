@@ -1410,5 +1410,16 @@ require 'my_debug_log'
 
 vim.api.nvim_set_keymap('n', '<C-t><C-t>', ':tabc<CR>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '<leader>vm', function()
+  -- 1. 执行命令（Noice 开始异步构建 split 窗口）
+  vim.cmd 'messages'
+
+  -- 2. 延迟 300 毫秒后执行窗口转移动作
+  vim.defer_fn(function()
+    -- 使用 n' 模式发送原始按键，模拟手动敲击 <C-w>T
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-W>T', true, false, true), 'n', false)
+  end, 200)
+end, { desc = 'open :[m]essage in new tab' })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

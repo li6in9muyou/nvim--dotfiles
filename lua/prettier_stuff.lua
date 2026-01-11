@@ -99,7 +99,7 @@ function M.format_hunks(bufnr)
       local start = hunk.added.start
       local last = start + hunk.added.count
       -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
-      local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
+      local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, false)[1]
       local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
       time('libq fmthunk/conformformat ' .. i)
       format(M.RANGE_CONFORM_OPT(range))
