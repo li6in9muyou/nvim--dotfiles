@@ -64,6 +64,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
+  local P = require('prettier_stuff')
   local current_mode = vim.fn.mode()
   if current_mode == 'v' or current_mode == '\22' then
     return
@@ -78,11 +79,11 @@ vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
       start = { start_line - 1, 0 },
       ['end'] = { end_line - 1, -1 },
     }
-    require('conform').format({ range = range, timeout_ms = 4000 }, function()
+    require('conform').format(P.RANGE_CONFORM_OPT(range), function()
       vim.cmd 'w'
     end)
   else
-    require('conform').format({ timeout_ms = 4000 }, function()
+    require('conform').format(P.DEFAULT_CONFORM_OPT(), function()
       vim.cmd 'w'
     end)
   end
@@ -1417,7 +1418,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require 'prettier_stuff'
+require('prettier_stuff')
 
 vim.keymap.set('x', '<leader>vl', ":'<,'>lua<CR>", { desc = '[r]un visual selection as Lua' })
 

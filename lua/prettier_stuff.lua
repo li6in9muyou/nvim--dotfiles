@@ -39,6 +39,14 @@ local M = {}
 
 local is_current_buffer_untracked = require('git_stuff').is_current_buffer_untracked
 
+function M.DEFAULT_CONFORM_OPT()
+  return { timeout_ms = 4000 }
+end
+
+function M.RANGE_CONFORM_OPT(range)
+  return { range = range, timeout_ms = 4000 }
+end
+
 local function count_char_offsets_for_hunks(bufnr, hunks)
   local hunks = require('gitsigns').get_hunks(bufnr)
   local last_line = 0
@@ -71,7 +79,7 @@ function M.format_hunks(bufnr)
 
   if is_current_buffer_untracked() then
     book.debug 'libq fmthunk/wholefile because it is untracked'
-    require('conform').format(DEFAULT_CONFORM_OPT())
+    require('conform').format(M.DEFAULT_CONFORM_OPT())
     return
   end
 
@@ -94,7 +102,7 @@ function M.format_hunks(bufnr)
       local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
       local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
       time('libq fmthunk/conformformat ' .. i)
-      format(RANGE_CONFORM_OPT(range))
+      format(M.RANGE_CONFORM_OPT(range))
       time_end('libq fmthunk/conformformat ' .. i)
     else
       book.debug 'libq fmthunk/skip hunk.type==delete'
