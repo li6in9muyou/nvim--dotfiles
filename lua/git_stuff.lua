@@ -4,7 +4,7 @@ function M.is_current_buffer_untracked()
   local filename = vim.fn.expand '%:p'
   book.debug('libq icbu/filename', filename)
   if filename == '' or not vim.fn.filereadable(filename) then
-    return false
+    return true
   end
 
   local git_root = vim.fn.system { 'git', 'rev-parse', '--show-toplevel' }
@@ -12,7 +12,7 @@ function M.is_current_buffer_untracked()
 
   book.debug('libq icbu/gitroot', git_root)
   if vim.v.shell_error ~= 0 or git_root == '' then
-    return false
+    return true
   end
 
   git_root = git_root:gsub('\\', '/')
@@ -42,7 +42,7 @@ function M.is_current_buffer_untracked()
   end
 
   book.debug 'libq icbu/returnfalse endoffunction'
-  return false
+  return true
 end
 
 return M
