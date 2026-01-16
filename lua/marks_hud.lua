@@ -3,10 +3,10 @@ local ns_id = vim.api.nvim_create_namespace 'marks_notify'
 
 local function update_marks_display()
   local bufnr = vim.api.nvim_get_current_buf()
-  local marks_data = {}
-  local highlights = {}
+  local raw_marks = {}
   local charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
+  -- 1. 获取所有标记数据
   for i = 1, #charset do
     local char = charset:sub(i, i)
     local mark = vim.api.nvim_buf_get_mark(bufnr, char)
@@ -18,47 +18,54 @@ local function update_marks_display()
       if #line_content > 60 then
         line_content = line_content:sub(1, 60) .. '...'
       end
-
-      local row_str = tostring(row)
-      local line_text = string.format('%s %s %s', char, row_str, line_content)
-      table.insert(marks_data, line_text)
-
-      table.insert(highlights, {
-        char_end = #char,
-        row_start = #char + 1,
-        row_end = #char + 1 + #row_str,
-        content_start = #char + 1 + #row_str + 1,
-      })
+      table.insert(raw_marks, { char = char, row = row, content = line_content })
     end
+  end
+
+  -- 2. 按照行号从小到大排序
+  table.sort(raw_marks, function(a, b)
+    return a.row < b.row
+  end)
+
+  -- 3. 准备显示文本和高亮位置
+  local marks_data = {}
+  local highlights = {}
+  for _, m in ipairs(raw_marks) do
+    local row_str = tostring(m.row)
+    local line_text = string.format('%s %s %s', m.char, row_str, m.content)
+    table.insert(marks_data, line_text)
+    table.insert(highlights, {
+      char_end = #m.char,
+      row_start = #m.char + 1,
+      row_end = #m.char + 1 + #row_str,
+      content_start = #m.char + 1 + #row_str + 1,
+    })
   end
 
   if #marks_data == 0 then
     marks_data = { 'No Marks' }
   end
 
-  local notify = require 'notify'
-  -- 在 marks_data 生成后，添加一个微小的差异以规避 x2 计数
-  table.insert(marks_data, string.format(' %f', os.clock())) -- 放在数组末尾作为一个隐藏行或仅用于改变哈希
+  -- 添加随机后缀规避 nvim-notify 的 x2 计数合并
+  table.insert(marks_data, string.format(' %f', os.clock()))
 
+  local notify = require 'notify'
   local res = notify(marks_data, 'info', {
     title = 'Marks',
     timeout = false,
     animate = false,
     replace = notify_record,
     render = function(buf, notif, hl)
-      -- 1. 填充内容
-      -- 去掉我们最后为了规避 x2 添加的那个时间戳行
       local display_content = {}
       for i = 1, #notif.message - 1 do
         table.insert(display_content, notif.message[i])
       end
+
+      -- 设置内容
       vim.api.nvim_buf_set_lines(buf, 0, -1, false, display_content)
 
-      -- 2. 应用高亮
-      -- 注意：render 函数执行时已经处于正确的 buffer 上下文中
+      -- 应用自定义高亮
       vim.api.nvim_buf_clear_namespace(buf, ns_id, 0, -1)
-
-      -- 这里直接使用你闭包里的 highlights 表
       for i, pos in ipairs(highlights) do
         local line_idx = i - 1
         if line_idx < #display_content then
@@ -72,6 +79,17 @@ local function update_marks_display()
   notify_record = res
 end
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'CursorHold', 'CursorHoldI' }, {
+-- 1. 仅保留 Buffer 切换事件
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
   callback = update_marks_display,
 })
+
+-- 2. 设置定时轮询，间隔 1000 毫秒
+local timer = vim.loop.new_timer()
+timer:start(
+  1000,
+  1000,
+  vim.schedule_wrap(function()
+    update_marks_display()
+  end)
+)
