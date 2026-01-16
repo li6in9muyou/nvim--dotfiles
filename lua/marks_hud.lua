@@ -79,16 +79,11 @@ local function update_marks_display()
   notify_record = res
 end
 
--- 1. 仅保留 Buffer 切换事件
-vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-  callback = update_marks_display,
-})
-
 -- 2. 设置定时轮询，间隔 1000 毫秒
-local timer = vim.loop.new_timer()
+local timer = vim.uv.new_timer()
 timer:start(
-  1000,
-  1000,
+  100,
+  800,
   vim.schedule_wrap(function()
     update_marks_display()
   end)
