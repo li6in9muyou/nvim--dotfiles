@@ -100,10 +100,14 @@ function M.format_hunks(bufnr)
       local last = start + hunk.added.count
       -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
       local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, false)[1]
-      local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
-      time('libq fmthunk/conformformat ' .. i)
-      format(M.RANGE_CONFORM_OPT(range))
-      time_end('libq fmthunk/conformformat ' .. i)
+      if nil ~= last_hunk_line then
+        local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() }, offset_table = offset_table }
+        time('libq fmthunk/conformformat ' .. i)
+        format(M.RANGE_CONFORM_OPT(range))
+        time_end('libq fmthunk/conformformat ' .. i)
+      else
+        book.debug('libq fmthunk/error/last_hunk_line is nil, nvim_buf_get_lines params', 0, last - 2, last - 1, false)
+      end
     else
       book.debug 'libq fmthunk/skip hunk.type==delete'
     end

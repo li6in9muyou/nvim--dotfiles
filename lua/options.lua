@@ -66,7 +66,6 @@ vim.opt.updatetime = 250
 
 -- It's just annoying
 vim.opt.swapfile = false
-vim.opt.updatetime = 200
 
 -- Follow indent of the previous line after o/O or whatever
 vim.opt.autoindent = true
