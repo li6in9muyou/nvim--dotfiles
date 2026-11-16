@@ -90,6 +90,13 @@ vim.keymap.set({ 'n', 'x' }, '<leader>vf', function()
 end, { desc = '[f]ormat whole file/selection', silent = true })
 
 vim.keymap.set('n', '<leader>vs', 'V:s/\\\\/\\//g', { desc = 'replace \\ with [s]lash in this line', noremap = true })
+-- <leader>vr：普通模式，执行【全buffer替换：仅U+2011 → 普通减号-】
+-- 方案A：直接用 % 全局范围，不需要走可视选区，更干净，不需要先手动<leader>va
+vim.keymap.set('n', '<leader>v-', [[:%s/\%u2011/-/g<CR>]], {
+  desc = 'replace non‑breaking‑hyphen(U+2011) to normal hyphen‑minus, whole buffer',
+  noremap = true,
+  silent = true,
+})
 
 local DEFAULT_BUFFER_ENABLE_FORMAT_ON_SAVE = true
 vim.keymap.set('n', '<leader>tf', function()
